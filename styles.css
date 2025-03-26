@@ -1,0 +1,328 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f4f4f4;
+  }
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  .header {
+    background: #fff;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+  .header .logo img {
+    width: 90px;
+    height: auto;
+  }
+  @media (min-width: 640px) {
+    .header .logo img {
+      width: 137px;
+    }
+  }
+  .content {
+    padding: 20px 0;
+  }
+  /* Course Header */
+  .course-header {
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+    background: linear-gradient(90deg, #6a11cb 0%, #2575fc 100%);
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+    color: #fff;
+    flex-wrap: wrap;
+  }
+  .course-header img {
+    width: 120px;
+    height: 120px;
+    border-radius: 10px;
+    margin-right: 20px;
+    border: 3px solid #fff;
+  }
+  .course-header .info {
+    flex: 1;
+  }
+  .course-header h1 {
+    font-size: 32px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+  .course-header span {
+    font-size: 14px;
+    opacity: 0.9;
+  }
+  .course-content {
+    margin-top: 20px;
+  }
+  .chapter {
+    border-bottom: 1px solid #ddd;
+    background: #fff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background 0.2s ease;
+  }
+  .chapter:hover {
+    background: #f9f9f9;
+  }
+  .chapter table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+  .chapter td {
+    vertical-align: middle;
+    padding: 15px 5px;
+  }
+  .chapter .chapter-number {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2c81f7;
+    background: #e6f0fa;
+    text-align: center;
+    line-height: 40px;
+  }
+  .chapter .chapter-title {
+    font-weight: bold;
+    font-size: 18px;
+    display: inline;
+  }
+  /* Updated Paper Tag Styles */
+  .chapter .paper-tag {
+    display: inline-block;
+    font-size: 12px;
+    color: #fff;
+    padding: 2px 8px;
+    border-radius: 12px;
+    margin-left: 10px;
+    vertical-align: middle;
+  }
+  .chapter .paper-tag.first-paper {
+    background: #2c81f7; /* Blue for 1st Paper */
+  }
+  .chapter .paper-tag.second-paper {
+    background: #dc3545; /* Red for 2nd Paper */
+  }
+  .chapter .progress {
+    color: #878787;
+    font-size: 14px;
+    margin-top: 5px;
+  }
+  .chapter .progress .percent-complete {
+    color: #2c81f7;
+  }
+  .chapter .arrow {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .chapter .arrow.rotated {
+    transform: rotate(180deg);
+  }
+  /* New table for subcontent */
+  .subcontent-table {
+    display: none;
+    width: 100%;
+    background: #f9f9f9;
+    border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+  }
+  .subcontent-table table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .subcontent-table td {
+    padding: 10px;
+    border-top: 1px solid #ddd;
+  }
+  .subcontent-table tr:first-child td {
+    border-top: none;
+  }
+  .subcontent-table .resource-icon {
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+  }
+  .subcontent-table .resource-info {
+    flex: 1;
+  }
+  .subcontent-table .resource-title {
+    font-weight: 500;
+    color: #333;
+  }
+  .subcontent-table .resource-meta {
+    color: #878787;
+    font-size: 12px;
+  }
+  .subcontent-table .resource-status {
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  .subcontent-table .status-viewed {
+    color: #28a745;
+    background: #e6f4ea;
+  }
+  .subcontent-table .status-unlock {
+    color: #dc3545;
+    background: #f8d7da;
+  }
+  .subcontent-table .resource-status:hover {
+    opacity: 0.8;
+  }
+  .chapter-row {
+    cursor: pointer;
+  }
+  .footer {
+    background: #f9f9f9;
+    padding: 20px;
+    text-align: center;
+  }
+
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      padding: 0 10px;
+    }
+    .course-header {
+      flex-direction: column;
+      text-align: center;
+    }
+    .course-header img {
+      margin: 0 auto 15px;
+    }
+    .course-header h1 {
+      font-size: 24px;
+    }
+    .chapter td {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .chapter .chapter-number {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 24px;
+    }
+    .subcontent-table td {
+      display: table-cell;
+    }
+  }
+  @media (max-width: 480px) {
+    .header .logo img {
+      width: 80px;
+    }
+    .course-header h1 {
+      font-size: 20px;
+    }
+    .chapter .chapter-title {
+      font-size: 16px;
+    }
+    .chapter .progress {
+      font-size: 12px;
+    }
+    .chapter .chapter-number {
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 24px;
+    }
+    .chapter .arrow {
+      width: 20px;
+    }
+    .chapter td {
+      display: table-cell;
+      vertical-align: middle;
+    }
+    .subcontent-table td {
+      display: table-cell;
+    }
+  }
+  .filter-bar {
+    margin: 20px 0;
+    text-align: center;
+    display: flex; /* Use flexbox for layout */
+    justify-content: center; /* Center the buttons */
+    flex-wrap: nowrap; /* Prevent wrapping to next line */
+    gap: 0.5rem; /* Responsive gap */
+  }
+  .filter-bar button {
+    background: #fff;
+    border: 1px solid #ddd;
+    padding: 0.5rem 1rem; /* Responsive padding using rem */
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: clamp(
+      12px,
+      1vw + 0.5rem,
+      16px
+    ); /* Scales with viewport, min 12px, max 16px */
+    transition: background 0.3s ease, color 0.3s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  /* Distinct colors for each button in default state */
+  .filter-bar button:nth-child(1) {
+    /* All Chapters */
+    background: #e6f0fa; /* Light blue */
+    color: #2c81f7;
+  }
+  .filter-bar button:nth-child(2) {
+    /* 1st Paper */
+    background: #fef4e6; /* Light orange */
+    color: #f76707;
+  }
+  .filter-bar button:nth-child(3) {
+    /* 2nd Paper */
+    background: #f8e6e6; /* Light red */
+    color: hsl(354, 70%, 54%);
+  }
+  .filter-bar button.active {
+    background: #2c81f7; /* Unified active color for consistency */
+    color: #fff;
+    border-color: #2c81f7;
+    transform: scale(1.05); /* Slight scale-up when active */
+  }
+  .filter-bar button:hover:not(.active) {
+    background: #f0f0f0;
+    transform: scale(1.05); /* Slight scale-up on hover */
+    opacity: 0.9;
+  }
+  /* Optional: Fine-tune for very small screens */
+  @media (max-width: 480px) {
+    .filter-bar {
+      gap: 0.3rem; /* Smaller gap on small screens */
+    }
+    .filter-bar button {
+      padding: 0.4rem 0.8rem; /* Slightly smaller padding */
+    }
+  }
+  .section-separator {
+    margin: 40px 0;
+    text-align: center;
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+  }
+  .course-content .chapter {
+    display: none; /* Hidden by default, shown based on filter */
+  }
+  .course-content .chapter.visible {
+    display: block; /* Shown when filter matches */
+  }
