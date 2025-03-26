@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vector Addition and Subtraction Simulator | ভেক্টর যোগ ও বিয়োগ সিমুলেটর</title>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to bottom, #e6f0fa, #f0f4f8);
+            color: #333;
+            line-height: 1.6;
+        }
+        header {
+            background: linear-gradient(90deg, #007bff, #00c4ff);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin: 30px auto;
+            width: 95%;
+            max-width: 1400px;
+            gap: 20px;
+        }
+        .content {
+            flex: 1;
+            min-width: 300px;
+            background: #fff;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        iframe {
+            width: 100%;
+            height: 593px;
+            border: none;
+        }
+        .theory {
+            flex: 0 0 35%;
+            min-width: 300px;
+            background: #fff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        .theory h2 {
+            color: #007bff;
+            margin-top: 0;
+            font-size: 1.5em;
+        }
+        .theory details {
+            margin: 15px 0;
+            padding: 10px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+        .interactive-section, .question-section, .simulation-sidebar {
+            background: #fff;
+            padding: 30px;
+            margin: 30px auto;
+            width: 95%;
+            max-width: 1400px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+        .interactive-section input[type="number"] {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            width: 120px;
+            margin: 10px;
+            transition: border-color 0.3s;
+        }
+        .interactive-section input[type="number"]:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+        .btn {
+            padding: 10px 20px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+        }
+        .btn:hover {
+            background: #0056b3;
+            transform: scale(1.05);
+        }
+        .question {
+            margin-bottom: 25px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s;
+        }
+        .question:hover {
+            transform: translateY(-5px);
+        }
+        .question h3 {
+            color: #007bff;
+            margin: 0 0 15px;
+            font-size: 1.2em;
+        }
+        .question input[type="text"] {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            width: 100%;
+            max-width: 200px;
+            margin: 10px 0;
+        }
+        .question .options label {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            cursor: pointer;
+        }
+        .hint {
+            display: none;
+            color: #666;
+            font-style: italic;
+            margin-top: 10px;
+        }
+        .answer.correct { color: #28a745; font-weight: bold; }
+        .answer.incorrect { color: #dc3545; font-weight: bold; }
+        .progress-bar {
+            width: 100%;
+            height: 20px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: #007bff;
+            transition: width 0.5s ease;
+        }
+        .simulation-sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .simulation-sidebar li {
+            margin: 15px 0;
+        }
+        .simulation-sidebar a {
+            color: #007bff;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .simulation-sidebar a:hover {
+            color: #0056b3;
+        }
+        footer {
+            text-align: center;
+            padding: 20px;
+            background: #e9ecef;
+            border-radius: 15px 15px 0 0;
+            font-size: 14px;
+            color: #666;
+        }
+        #score { font-weight: bold; color: #007bff; }
+        @media (max-width: 768px) {
+            .container { flex-direction: column; }
+            .theory { margin-top: 20px; }
+            iframe { height: 400px; }
+        }
+    </style>
+    <script>
+        let score = 0, totalQuestions = 12, progress = 0;
+
+        function updateContent() {
+            document.getElementById('title').innerHTML = "Vector Addition and Subtraction Simulator | ভেক্টর যোগ ও বিয়োগ সিমুলেটর";
+            document.getElementById('theory-title').innerHTML = "Theoretical Concepts";
+            document.getElementById('vector-addition-sum').innerHTML = "<strong>ভেক্টর যোগ:</strong> দুটি ভেক্টর \\(\\vec{P}\\) এবং \\(\\vec{Q}\\) একত্রিত করে ফলাফল \\(\\vec{R} = \\vec{P} + \\vec{Q}\\) পাওয়া যায়।";
+            document.getElementById('vector-addition-text').innerHTML = "কোণ \\(\\alpha\\)-এর জন্য: \\(R = \\sqrt{P^2 + Q^2 + 2PQ\\cos\\alpha}\\), দিক \\(\\phi = \\tan^{-1}\\left(\\frac{Q\\sin\\alpha}{P + Q\\cos\\alpha}\\right)\\).<br>উদাহরণ: \\(\\vec{P} = 3\\), \\(\\vec{Q} = 4\\), \\(\\alpha = 90^\\circ\\) → \\(R = 5\\).";
+            document.getElementById('vector-addition-parallelogram-sum').innerHTML = "<strong>ভেক্টর যোগের জন্য সমান্তরাল চতুর্ভুজ সূত্র:</strong>";
+            document.getElementById('vector-addition-parallelogram-text').innerHTML = "যদি দুটি ভেক্টর \\(\\vec{P}\\) এবং \\(\\vec{Q}\\) সমান্তরাল চতুর্ভুজের সন্নিহিত বাহু হিসেবে থাকে এবং তাদের মধ্যবর্তী কোণ \\(\\alpha\\) হয়:<br><strong>ফলাফলের মান:</strong> \\(R = \\sqrt{P^2 + Q^2 + 2PQ\\cos\\alpha}\\)<br><strong>সর্বোচ্চ মান:</strong> \\(R_{\\text{max}} = P + Q\\) [যখন \\(\\alpha = 0^\\circ\\)]<br><strong>সর্বনিম্ন মান:</strong> \\(R_{\\text{min}} = |P - Q|\\) [যখন \\(\\alpha = 180^\\circ\\)]<br><strong>উদাহরণ:</strong> \\(\\vec{A} = 12\\), \\(\\vec{B} = 5\\), এবং \\(\\vec{C} = 13\\) হলে, \\(C^2 = A^2 + B^2\\) → \\(13^2 = 12^2 + 5^2\\), তাই কোণ 90°।";
+            document.getElementById('vector-subtraction-sum').innerHTML = "<strong>ভেক্টর বিয়োগ:</strong> পার্থক্য \\(\\vec{R} = \\vec{P} - \\vec{Q}\\) নির্ণয় করে।";
+            document.getElementById('vector-subtraction-text').innerHTML = "এটি \\(\\vec{P} + (-\\vec{Q})\\)-এর সমতুল্য। মান: \\(R = \\sqrt{P^2 + Q^2 - 2PQ\\cos\\alpha}\\).<br>উদাহরণ: \\(\\vec{P} = 5\\), \\(\\vec{Q} = 3\\), \\(\\alpha = 180^\\circ\\) → \\(R = 2\\).";
+            document.getElementById('graphical-method-sum').innerHTML = "<strong>গ্রাফিকাল পদ্ধতি:</strong>";
+            document.getElementById('graphical-method-text').innerHTML = "প্যারালেলোগ্রাম বা ত্রিভুজ নিয়ম ব্যবহার করে ফলাফল চিত্রিত করুন।<br>উদাহরণ: 60°-এ দুটি ভেক্টর প্যারালেলোগ্রাম তৈরি করে, ফলাফল কর্ণ বরাবর।";
+            document.getElementById('components-method-sum').innerHTML = "<strong>উপাদান পদ্ধতি:</strong>";
+            document.getElementById('components-method-text').innerHTML = "x এবং y উপাদানে ভাগ করুন: \\(R_x = P_x + Q_x\\), \\(R_y = P_y + Q_y\\).<br>উদাহরণ: একটি বাহুতে 60° কোণে 200 N বল প্রয়োগ করা হয়। x-উপাদান: \\(F_x = F \\cos 60^\\circ = 200 \\cos 60^\\circ = 100\\) N।<br>আরেকটি উদাহরণ: \\(\\vec{P} = (3, 0)\\), \\(\\vec{Q} = (0, 4)\\) → \\(\\vec{R} = (3, 4)\\), \\(R = 5\\).";
+            document.getElementById('unit-vector-method-sum').innerHTML = "<strong>ইউনিট ভেক্টর পদ্ধতি:</strong>";
+            document.getElementById('unit-vector-method-text').innerHTML = "ভেক্টরকে \\(\\hat{i}\\) এবং \\(\\hat{j}\\) উপাদানে ভাগ করুন। উদাহরণ: \\(\\vec{B} = 8 \\cos 0 \\hat{i} + 8 \\sin 0 \\hat{j}\\), \\(\\vec{A} = a \\hat{i}\\), তাই \\(\\vec{A} + \\vec{B} = (a + 8 \\cos 0) \\hat{i} + 8 \\sin 0 \\hat{j}\\). y-উপাদান শূন্য হলে, \\(8 \\sin 0 = 0\\), এবং x-উপাদান থেকে \\(a = 8/\\sqrt{5}\\).";
+            document.getElementById('resultant-direction-sum').innerHTML = "<strong>ফলাফলের দিক নির্ণয়:</strong>";
+            document.getElementById('resultant-direction-text').innerHTML = "ফলাফলের দিক নির্ণয় করতে: \\(\\tan \\theta = \\frac{Q \\sin \\alpha}{P + Q \\cos \\alpha}\\).<br>উদাহরণ: \\(\\vec{P} = 5\\), \\(\\vec{Q} = 5\\), \\(\\alpha = 120^\\circ\\), তাহলে \\(\\tan \\theta = \\frac{5 \\sin 120^\\circ}{5 + 5 \\cos 120^\\circ} = \\sqrt{3}\\), তাই \\(\\theta = 60^\\circ\\).";
+            document.getElementById('applications-sum').innerHTML = "<strong>প্রয়োগ:</strong>";
+            document.getElementById('applications-text').innerHTML = "<em>নৌযান চলাচল:</em> একটি বিমান 200 km/h পূর্বে, বাতাস 50 km/h উত্তরে। ফলাফল: \\(\\sqrt{200^2 + 50^2} = 206.2\\) km/h, \\(\\tan^{-1}(50/200) \\approx 14^\\circ\\)-এ।<br><em>বাস্তব জীবনের উদাহরণ:</em> একটি বিমান পূর্ব দিকে 250 km/h বেগে উড়ছে, বাতাস দক্ষিণ-পূর্ব দিকে 30° কোণে 250 km/h বেগে প্রবাহিত হচ্ছে। ফলাফল: \\(R = \\sqrt{250^2 + 250^2 + 2 \\times 250 \\times 250 \\cos 60^\\circ} = 433\\) km/h।";
+            document.getElementById('worked-example-sum').innerHTML = "<strong>কাজের উদাহরণ:</strong>";
+            document.getElementById('worked-example-text').innerHTML = "যোগ করুন \\(\\vec{P} = 6\\) 30°-এ এবং \\(\\vec{Q} = 8\\) 90°-এ:<br>1. \\(P_x = 6\\cos 30^\\circ = 5.2\\), \\(P_y = 6\\sin 30^\\circ = 3\\)<br>2. \\(Q_x = 0\\), \\(Q_y = 8\\)<br>3. \\(R_x = 5.2\\), \\(R_y = 11\\)<br>4. \\(R = \\sqrt{5.2^2 + 11^2} \\approx 12.2\\)";
+            document.getElementById('interactive-title').innerHTML = "Interactive Tool";
+            document.getElementById('interactive-text').innerHTML = "দুটি ভেক্টরের মান এবং তাদের মধ্যবর্তী কোণ লিখুন ফলাফল দেখতে:";
+            document.getElementById('calculate-btn').innerHTML = "গণনা করুন";
+            document.getElementById('magnitudeA').placeholder = "মান P";
+            document.getElementById('magnitudeB').placeholder = "মান Q";
+            document.getElementById('angle').placeholder = "কোণ α (°)";
+            document.getElementById('practice-title').innerHTML = "Practice Questions";
+            document.getElementById('fill1-title').innerHTML = "Fill in the Gap 1:";
+            document.getElementById('fill1-text').innerHTML = "দুটি ভেক্টর \\(\\vec{P} = 3\\) একক এবং \\(\\vec{Q} = 4\\) একক লম্বভাবে আছে। তাদের ফলাফলের মান কত?";
+            document.getElementById('fill1-hint').innerHTML = "লম্বভাবে থাকলে \\(R = \\sqrt{P^2 + Q^2}\\) ব্যবহার করুন।";
+            document.getElementById('fill1-input').placeholder = "আপনার উত্তর লিখুন";
+            document.getElementById('fill1-btn').innerHTML = "উত্তর যাচাই";
+            document.getElementById('fill1-hint-btn').innerHTML = "ইঙ্গিত";
+            document.getElementById('fill2-title').innerHTML = "Fill in the Gap 2:";
+            document.getElementById('fill2-text').innerHTML = "\\(\\vec{P} = 10\\) এবং \\(\\vec{Q} = 6\\) বিপরীত দিকে। \\(\\vec{P} - \\vec{Q}\\)-এর মান কত?";
+            document.getElementById('fill2-hint').innerHTML = "বিপরীত দিকে থাকলে মান বিয়োগ করুন: \\(|P - Q|\\)।";
+            document.getElementById('fill2-input').placeholder = "আপনার উত্তর লিখুন";
+            document.getElementById('fill2-btn').innerHTML = "উত্তর যাচাই";
+            document.getElementById('fill2-hint-btn').innerHTML = "ইঙ্গিত";
+            document.getElementById('fill3-title').innerHTML = "Fill in the Gap 3:";
+            document.getElementById('fill3-text').innerHTML = "\\(\\vec{P} = (2, 3)\\) এবং \\(\\vec{Q} = (1, -1)\\) যোগ করুন। ফলাফলের x-উপাদান কত?";
+            document.getElementById('fill3-hint').innerHTML = "x-উপাদান যোগ করুন: \\(R_x = P_x + Q_x\\)।";
+            document.getElementById('fill3-input').placeholder = "আপনার উত্তর লিখুন";
+            document.getElementById('fill3-btn').innerHTML = "উত্তর যাচাই";
+            document.getElementById('fill3-hint-btn').innerHTML = "ইঙ্গিত";
+            document.getElementById('fill4-title').innerHTML = "Fill in the Gap 4:";
+            document.getElementById('fill4-text').innerHTML = "একটি বাহুতে 60° কোণে 200 N বল প্রয়োগ করা হয়। এর x-উপাদান কত?";
+            document.getElementById('fill4-hint').innerHTML = "x-উপাদান: \\(F_x = F \\cos 60^\\circ\\)।";
+            document.getElementById('fill4-input').placeholder = "আপনার উত্তর লিখুন";
+            document.getElementById('fill4-btn').innerHTML = "উত্তর যাচাই";
+            document.getElementById('fill4-hint-btn').innerHTML = "ইঙ্গিত";
+            document.getElementById('fill5-title').innerHTML = "Fill in the Gap 5:";
+            document.getElementById('fill5-text').innerHTML = "দুটি ভেক্টর \\(\\vec{A} = 12\\), \\(\\vec{B} = 5\\), এবং \\(\\vec{C} = 13\\) এর মান দেওয়া আছে। যদি \\(\\vec{A} + \\vec{B} = \\vec{C}\\), তবে \\(\\vec{A}\\) এবং \\(\\vec{B}\\) এর মধ্যবর্তী কোণ কত?";
+            document.getElementById('fill5-hint').innerHTML = "\\(\\vec{A} + \\vec{B} = \\vec{C}\\) হলে, \\(C^2 = A^2 + B^2\\) যদি কোণ 90° হয়।";
+            document.getElementById('fill5-input').placeholder = "আপনার উত্তর লিখুন";
+            document.getElementById('fill5-btn').innerHTML = "উত্তর যাচাই";
+            document.getElementById('fill5-hint-btn').innerHTML = "ইঙ্গিত";
+            document.getElementById('fill6-title').innerHTML = "Fill in the Gap 6:";
+            document.getElementById('fill6-text').innerHTML = "দুটি ভেক্টর \\(\\vec{P} = 5\\) এবং \\(\\vec{Q} = 5\\) এর মধ্যবর্তী কোণ 120°। ফলাফলের দিক \\(\\theta\\) কত (\\(\\vec{P}\\) এর সাপেক্ষে)?";
+            document.getElementById('fill6-hint').innerHTML = "\\(\\tan \\theta = \\frac{Q \\sin \\alpha}{P + Q \\cos \\alpha}\\), যেখানে \\(\\alpha = 120^\\circ\\)।";
+            document.getElementById('fill6-input').placeholder = "আপনার উত্তর লিখুন";
+            document.getElementById('fill6-btn').innerHTML = "উত্তর যাচাই";
+            document.getElementById('fill6-hint-btn').innerHTML = "ইঙ্গিত";
+            document.getElementById('fill7-title').innerHTML = "Fill in the Gap 7:";
+            document.getElementById('fill7-text').innerHTML = "\\(\\vec{A} = a \\hat{i}\\) এবং \\(\\vec{B} = 8 \\cos 0 \\hat{i} + 8 \\sin 0 \\hat{j}\\)। যদি \\(\\vec{A} + \\vec{B}\\) এর y-উপাদান শূন্য হয়, তবে \\(|\\vec{A}|\\) এর মান কত?";
+            document.getElementById('fill7-hint').innerHTML = "y-উপাদান শূন্য হলে, \\(8 \\sin 0 = 0\\), এবং x-উপাদান থেকে \\(a\\) বের করুন।";
+            document.getElementById('fill7-input').placeholder = "আপনার উত্তর লিখুন";
+            document.getElementById('fill7-btn').innerHTML = "উত্তর যাচাই";
+            document.getElementById('fill7-hint-btn').innerHTML = "ইঙ্গিত";
+            document.getElementById('mcq1-title').innerHTML = "MCQ 1:";
+            document.getElementById('mcq1-text').innerHTML = "দুটি লম্ব ভেক্টরের মানের সূত্র কী?";
+            document.getElementById('mcq1-hint').innerHTML = "লম্ব ভেক্টরের জন্য \\(\\cos 90^\\circ = 0\\)।";
+            document.getElementById('mcq1-option-a').innerHTML = "ক) \\(R = P + Q\\)";
+            document.getElementById('mcq1-option-b').innerHTML = "খ) \\(R = \\sqrt{P^2 + Q^2}\\)";
+            document.getElementById('mcq1-option-c').innerHTML = "গ) \\(R = P - Q\\)";
+            document.getElementById('mcq1-btn').innerHTML = "উত্তর যাচাই";
+            document.getElementById('mcq1-hint-btn').innerHTML = "ইঙ্গিত";
+            document.getElementById('mcq2-title').innerHTML = "MCQ 2:";
+            document.getElementById('mcq2-text').innerHTML = "যদি \\(\\vec{P}\\) এবং \\(\\vec{Q}\\) বিপরীত দিকে থাকে, তবে \\(\\vec{P} - \\vec{Q}\\)-এর মান কত?";
+            document.getElementById('mcq2-hint').innerHTML = "বিপরীত দিক মানে \\(\\alpha = 180^\\circ\\)।";
+            document.getElementById('mcq2-option-a').innerHTML = "ক) \\(|P - Q|\\)";
+            document.getElementById('mcq2-option-b').innerHTML = "খ) \\(\\sqrt{P^2 + Q^2}\\)";
+            document.getElementById('mcq2-option-c').innerHTML = "গ) \\(P + Q\\)";
+            document.getElementById('mcq2-btn').innerHTML = "উত্তর যাচাই";
+            document.getElementById('mcq2-hint-btn').innerHTML = "ইঙ্গিত";
+            document.getElementById('mcq3-title').innerHTML = "MCQ 3:";
+            document.getElementById('mcq3-text').innerHTML = "দুটি সমান মানের ভেক্টর 5 একক 60°-এ আছে। তাদের ফলাফলের মান কত?";
+            document.getElementById('mcq3-hint').innerHTML = "\\(R = \\sqrt{P^2 + Q^2 + 2PQ\\cos\\alpha}\\), যেখানে \\(\\cos 60^\\circ = 0.5\\)।";
+            document.getElementById('mcq3-option-a').innerHTML = "ক) 5";
+            document.getElementById('mcq3-option-b').innerHTML = "খ) 8.66";
+            document.getElementById('mcq3-option-c').innerHTML = "গ) 10";
+            document.getElementById('mcq3-btn').innerHTML = "উত্তর যাচাই";
+            document.getElementById('mcq3-hint-btn').innerHTML = "ইঙ্গিত";
+            document.getElementById('mcq4-title').innerHTML = "MCQ 4:";
+            document.getElementById('mcq4-text').innerHTML = "একটি বিমান পূর্ব দিকে 250 km/h বেগে উড়ছে, বাতাস দক্ষিণ-পূর্ব দিকে 30° কোণে 250 km/h বেগে প্রবাহিত হচ্ছে। ফলাফল বেগ কত?";
+            document.getElementById('mcq4-hint').innerHTML = "\\(R = \\sqrt{P^2 + Q^2 + 2PQ\\cos\\alpha}\\), যেখানে \\(\\cos 60^\\circ = 0.5\\)।";
+            document.getElementById('mcq4-option-a').innerHTML = "ক) 433 km/h";
+            document.getElementById('mcq4-option-b').innerHTML = "খ) 500 km/h";
+            document.getElementById('mcq4-option-c').innerHTML = "গ) 250 km/h";
+            document.getElementById('mcq4-btn').innerHTML = "উত্তর যাচাই";
+            document.getElementById('mcq4-hint-btn').innerHTML = "ইঙ্গিত";
+            document.getElementById('mcq5-title').innerHTML = "MCQ 5:";
+            document.getElementById('mcq5-text').innerHTML = "দুটি ভেক্টর \\(\\vec{P}\\) এবং \\(\\vec{Q}\\) এর মান যথাক্রমে 16 এবং 12। যদি তাদের ফলাফল 20 হয়, তবে তাদের মধ্যবর্তী কোণ কত?";
+            document.getElementById('mcq5-hint').innerHTML = "\\(R^2 = P^2 + Q^2 + 2PQ\\cos\\alpha\\) ব্যবহার করুন।";
+            document.getElementById('mcq5-option-a').innerHTML = "ক) 60°";
+            document.getElementById('mcq5-option-b').innerHTML = "খ) 90°";
+            document.getElementById('mcq5-option-c').innerHTML = "গ) 120°";
+            document.getElementById('mcq5-btn').innerHTML = "উত্তর যাচাই";
+            document.getElementById('mcq5-hint-btn').innerHTML = "ইঙ্গিত";
+            document.getElementById('generate-btn').innerHTML = "নতুন প্রশ্ন";
+            document.getElementById('sim-title').innerHTML = "More Simulations";
+            document.getElementById('sim-projectile').innerHTML = "প্রক্ষেপণ গতি সিমুলেটর";
+            document.getElementById('sim-vector-add').innerHTML = "ভেক্টর যোগ ল্যাব (PhET)";
+            document.getElementById('sim-placeholder').innerHTML = "(আরও সিমুলেশন এখানে যোগ করা যেতে পারে)";
+            document.getElementById('score-label').innerHTML = "স্কোর: ";
+            document.getElementById('progress-label').innerHTML = "অগ্রগতি:";
+            document.getElementById('footer').innerHTML = "© 2025 ভেক্টর যোগ ও বিয়োগ সিমুলেটর। সর্বস্বত্ব সংরক্ষিত।";
+            MathJax.typesetPromise();
+        }
+
+        function updateScore(correct) {
+            if (correct) {
+                score++;
+                progress += 100 / totalQuestions;
+            }
+            document.getElementById('score').textContent = `${score}/${totalQuestions}`;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('progress-fill-text').textContent = `${Math.round(progress)}%`;
+        }
+
+        function checkFillInTheBlank(id, correctAnswer, resultId) {
+            const answer = document.getElementById(id).value.trim();
+            const result = document.getElementById(resultId);
+            const isCorrect = Math.abs(parseFloat(answer) - correctAnswer) < 0.01;
+            result.textContent = isCorrect ? "সঠিক উত্তর! 🎉" : `ভুল! সঠিক উত্তর হল ${correctAnswer}.`;
+            result.className = isCorrect ? "answer correct" : "answer incorrect";
+            updateScore(isCorrect);
+            MathJax.typesetPromise();
+        }
+
+        function checkMCQ(name, correctValue, resultId) {
+            const options = document.getElementsByName(name);
+            const result = document.getElementById(resultId);
+            let isCorrect = false;
+            options.forEach(option => {
+                if (option.checked && option.value === correctValue) isCorrect = true;
+            });
+            result.textContent = isCorrect ? "সঠিক উত্তর! 🎉" : `ভুল! সঠিক উত্তর হল ${correctValue === 'a' ? 'ক' : correctValue === 'b' ? 'খ' : 'গ'}.`;
+            result.className = isCorrect ? "answer correct" : "answer incorrect";
+            updateScore(isCorrect);
+            MathJax.typesetPromise();
+        }
+
+        function calculateResultant() {
+            const magP = parseFloat(document.getElementById('magnitudeA').value);
+            const magQ = parseFloat(document.getElementById('magnitudeB').value);
+            const alpha = parseFloat(document.getElementById('angle').value) * Math.PI / 180;
+            if (isNaN(magP) || isNaN(magQ) || isNaN(alpha)) {
+                document.getElementById('resultant-output').innerHTML = "দয়া করে সঠিক সংখ্যা লিখুন।";
+            } else {
+                const r = Math.sqrt(magP * magP + magQ * magQ + 2 * magP * magQ * Math.cos(alpha)).toFixed(2);
+                const thetaP = (Math.atan2(magQ * Math.sin(alpha), magP + magQ * Math.cos(alpha)) * 180 / Math.PI).toFixed(2);
+                const thetaQ = (Math.atan2(magP * Math.sin(alpha), magQ + magP * Math.cos(alpha)) * 180 / Math.PI).toFixed(2);
+                document.getElementById('resultant-output').innerHTML = 
+                    `\\( R = ${r} \\) একক, \\( \\theta_P = ${thetaP}^\\circ \\) \\(\\vec{P}\\) থেকে, \\( \\theta_Q = ${thetaQ}^\\circ \\) \\(\\vec{Q}\\) থেকে`;
+            }
+            MathJax.typesetPromise();
+        }
+
+        function generateProblem() {
+            const magP = Math.floor(Math.random() * 10) + 1;
+            const magQ = Math.floor(Math.random() * 10) + 1;
+            const alpha = Math.floor(Math.random() * 180);
+            const correctR = Math.sqrt(magP * magP + magQ * magQ + 2 * magP * magQ * Math.cos(alpha * Math.PI / 180)).toFixed(2);
+            document.getElementById('fill1-text').innerHTML = 
+                `\\(\\vec{P} = ${magP}\\) একক এবং \\(\\vec{Q} = ${magQ}\\) একক \\(\\alpha = ${alpha}^\\circ\\)-এ যোগ করুন। তাদের ফলাফলের মান কত?`;
+            window.checkFillInTheBlankCustom = (id, resultId) => checkFillInTheBlank(id, parseFloat(correctR), resultId);
+            MathJax.typesetPromise();
+        }
+
+        function showHint(hintId) {
+            const hint = document.getElementById(hintId);
+            hint.style.display = hint.style.display === 'block' ? 'none' : 'block';
+            MathJax.typesetPromise();
+        }
+
+        window.onload = () => {
+            updateScore(false); // Initialize score display
+            updateContent();
+            MathJax.typesetPromise();
+        };
+    </script>
+</head>
+<body>
+    <header>
+        <h1 id="title"></h1>
+    </header>
+
+    <div class="container">
+        <div class="content">
+            <iframe scrolling="no" src="https://www.geogebra.org/material/iframe/id/1815911/width/984/height/593/border/888888/rc/false/ai/false/sdz/false/smb/false/stb/false/stbh/true/ld/false/sri/true/at/auto" style="border:0px;"></iframe>
+        </div>
+        <div class="theory">
+            <h2 id="theory-title"></h2>
+            <details><summary id="vector-addition-sum"></summary><p id="vector-addition-text"></p></details>
+            <details><summary id="vector-addition-parallelogram-sum"></summary><p id="vector-addition-parallelogram-text"></p></details>
+            <details><summary id="vector-subtraction-sum"></summary><p id="vector-subtraction-text"></p></details>
+            <details><summary id="graphical-method-sum"></summary><p id="graphical-method-text"></p></details>
+            <details><summary id="components-method-sum"></summary><p id="components-method-text"></p></details>
+            <details><summary id="unit-vector-method-sum"></summary><p id="unit-vector-method-text"></p></details>
+            <details><summary id="resultant-direction-sum"></summary><p id="resultant-direction-text"></p></details>
+            <details><summary id="applications-sum"></summary><p id="applications-text"></p></details>
+            <details><summary id="worked-example-sum"></summary><p id="worked-example-text"></p></details>
+        </div>
+    </div>
+
+    <div class="interactive-section">
+        <h2 id="interactive-title"></h2>
+        <p id="interactive-text"></p>
+        <input type="number" id="magnitudeA" min="0">
+        <input type="number" id="magnitudeB" min="0">
+        <input type="number" id="angle" min="0" max="360">
+        <button id="calculate-btn" class="btn" onclick="calculateResultant()"></button>
+        <div id="resultant-output"></div>
+    </div>
+
+    <div class="question-section">
+        <h2 id="practice-title"></h2>
+        <div class="progress-bar"><div id="progress-fill" class="progress-fill" style="width: 0%;"></div></div>
+        <div class="question">
+            <h3 id="fill1-title"></h3>
+            <p id="fill1-text"></p>
+            <input type="text" id="fill1-input">
+            <button id="fill1-btn" class="btn" onclick="window.checkFillInTheBlankCustom ? window.checkFillInTheBlankCustom('fill1-input', 'fill1-result') : checkFillInTheBlank('fill1-input', 5, 'fill1-result')"></button>
+            <button id="fill1-hint-btn" class="btn" onclick="showHint('fill1-hint')"></button>
+            <div id="fill1-hint" class="hint"></div>
+            <div id="fill1-result"></div>
+        </div>
+        <div class="question">
+            <h3 id="fill2-title"></h3>
+            <p id="fill2-text"></p>
+            <input type="text" id="fill2-input">
+            <button id="fill2-btn" class="btn" onclick="checkFillInTheBlank('fill2-input', 4, 'fill2-result')"></button>
+            <button id="fill2-hint-btn" class="btn" onclick="showHint('fill2-hint')"></button>
+            <div id="fill2-hint" class="hint"></div>
+            <div id="fill2-result"></div>
+        </div>
+        <div class="question">
+            <h3 id="fill3-title"></h3>
+            <p id="fill3-text"></p>
+            <input type="text" id="fill3-input">
+            <button id="fill3-btn" class="btn" onclick="checkFillInTheBlank('fill3-input', 3, 'fill3-result')"></button>
+            <button id="fill3-hint-btn" class="btn" onclick="showHint('fill3-hint')"></button>
+            <div id="fill3-hint" class="hint"></div>
+            <div id="fill3-result"></div>
+        </div>
+        <div class="question">
+            <h3 id="fill4-title"></h3>
+            <p id="fill4-text"></p>
+            <input type="text" id="fill4-input">
+            <button id="fill4-btn" class="btn" onclick="checkFillInTheBlank('fill4-input', 100, 'fill4-result')"></button>
+            <button id="fill4-hint-btn" class="btn" onclick="showHint('fill4-hint')"></button>
+            <div id="fill4-hint" class="hint"></div>
+            <div id="fill4-result"></div>
+        </div>
+        <div class="question">
+            <h3 id="fill5-title"></h3>
+            <p id="fill5-text"></p>
+            <input type="text" id="fill5-input">
+            <button id="fill5-btn" class="btn" onclick="checkFillInTheBlank('fill5-input', 90, 'fill5-result')"></button>
+            <button id="fill5-hint-btn" class="btn" onclick="showHint('fill5-hint')"></button>
+            <div id="fill5-hint" class="hint"></div>
+            <div id="fill5-result"></div>
+        </div>
+        <div class="question">
+            <h3 id="fill6-title"></h3>
+            <p id="fill6-text"></p>
+            <input type="text" id="fill6-input">
+            <button id="fill6-btn" class="btn" onclick="checkFillInTheBlank('fill6-input', 60, 'fill6-result')"></button>
+            <button id="fill6-hint-btn" class="btn" onclick="showHint('fill6-hint')"></button>
+            <div id="fill6-hint" class="hint"></div>
+            <div id="fill6-result"></div>
+        </div>
+        <div class="question">
+            <h3 id="fill7-title"></h3>
+            <p id="fill7-text"></p>
+            <input type="text" id="fill7-input">
+            <button id="fill7-btn" class="btn" onclick="checkFillInTheBlank('fill7-input', 8/Math.sqrt(5), 'fill7-result')"></button>
+            <button id="fill7-hint-btn" class="btn" onclick="showHint('fill7-hint')"></button>
+            <div id="fill7-hint" class="hint"></div>
+            <div id="fill7-result"></div>
+        </div>
+        <div class="question">
+            <h3 id="mcq1-title"></h3>
+            <p id="mcq1-text"></p>
+            <div class="options">
+                <label><input type="radio" name="mcq1" value="a"><span id="mcq1-option-a"></span></label>
+                <label><input type="radio" name="mcq1" value="b"><span id="mcq1-option-b"></span></label>
+                <label><input type="radio" name="mcq1" value="c"><span id="mcq1-option-c"></span></label>
+            </div>
+            <button id="mcq1-btn" class="btn" onclick="checkMCQ('mcq1', 'b', 'mcq1-result')"></button>
+            <button id="mcq1-hint-btn" class="btn" onclick="showHint('mcq1-hint')"></button>
+            <div id="mcq1-hint" class="hint"></div>
+            <div id="mcq1-result"></div>
+        </div>
+        <div class="question">
+            <h3 id="mcq2-title"></h3>
+            <p id="mcq2-text"></p>
+            <div class="options">
+                <label><input type="radio" name="mcq2" value="a"><span id="mcq2-option-a"></span></label>
+                <label><input type="radio" name="mcq2" value="b"><span id="mcq2-option-b"></span></label>
+                <label><input type="radio" name="mcq2" value="c"><span id="mcq2-option-c"></span></label>
+            </div>
+            <button id="mcq2-btn" class="btn" onclick="checkMCQ('mcq2', 'a', 'mcq2-result')"></button>
+            <button id="mcq2-hint-btn" class="btn" onclick="showHint('mcq2-hint')"></button>
+            <div id="mcq2-hint" class="hint"></div>
+            <div id="mcq2-result"></div>
+        </div>
+        <div class="question">
+            <h3 id="mcq3-title"></h3>
+            <p id="mcq3-text"></p>
+            <div class="options">
+                <label><input type="radio" name="mcq3" value="a"><span id="mcq3-option-a"></span></label>
+                <label><input type="radio" name="mcq3" value="b"><span id="mcq3-option-b"></span></label>
+                <label><input type="radio" name="mcq3" value="c"><span id="mcq3-option-c"></span></label>
+            </div>
+            <button id="mcq3-btn" class="btn" onclick="checkMCQ('mcq3', 'b', 'mcq3-result')"></button>
+            <button id="mcq3-hint-btn" class="btn" onclick="showHint('mcq3-hint')"></button>
+            <div id="mcq3-hint" class="hint"></div>
+            <div id="mcq3-result"></div>
+        </div>
+        <div class="question">
+            <h3 id="mcq4-title"></h3>
+            <p id="mcq4-text"></p>
+            <div class="options">
+                <label><input type="radio" name="mcq4" value="a"><span id="mcq4-option-a"></span></label>
+                <label><input type="radio" name="mcq4" value="b"><span id="mcq4-option-b"></span></label>
+                <label><input type="radio" name="mcq4" value="c"><span id="mcq4-option-c"></span></label>
+            </div>
+            <button id="mcq4-btn" class="btn" onclick="checkMCQ('mcq4', 'a', 'mcq4-result')"></button>
+            <button id="mcq4-hint-btn" class="btn" onclick="showHint('mcq4-hint')"></button>
+            <div id="mcq4-hint" class="hint"></div>
+            <div id="mcq4-result"></div>
+        </div>
+        <div class="question">
+            <h3 id="mcq5-title"></h3>
+            <p id="mcq5-text"></p>
+            <div class="options">
+                <label><input type="radio" name="mcq5" value="a"><span id="mcq5-option-a"></span></label>
+                <label><input type="radio" name="mcq5" value="b"><span id="mcq5-option-b"></span></label>
+                <label><input type="radio" name="mcq5" value="c"><span id="mcq5-option-c"></span></label>
+            </div>
+            <button id="mcq5-btn" class="btn" onclick="checkMCQ('mcq5', 'b', 'mcq5-result')"></button>
+            <button id="mcq5-hint-btn" class="btn" onclick="showHint('mcq5-hint')"></button>
+            <div id="mcq5-hint" class="hint"></div>
+            <div id="mcq5-result"></div>
+        </div>
+        <button id="generate-btn" class="btn" onclick="generateProblem()"></button>
+    </div>
+
+    <div class="simulation-sidebar">
+        <h2 id="sim-title"></h2>
+        <ul>
+            <li><a href="https://www.geogebra.org/m/kqwgj5zv" target="_blank" id="sim-projectile"></a></li>
+            <li><a href="https://phet.colorado.edu/sims/html/vector-addition/latest/vector-addition_en.html" target="_blank" id="sim-vector-add"></a></li>
+            <li id="sim-placeholder"></li>
+        </ul>
+    </div>
+
+    <footer>
+        <p><span id="progress-label"></span> <span id="progress-fill-text">0%</span></p>
+        <p><span id="score-label"></span><span id="score">0/12</span></p>
+        <p id="footer"></p>
+    </footer>
+</body>
+</html>

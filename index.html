@@ -1,2545 +1,1824 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="title" content="Ukorsho BUET Physics" />
-    <meta
-      name="description"
-      content="Comprehensive Physics Course for BUET Preparation - Lectures, Tests, and Practice Materials"
-    />
-    <meta name="keywords" content="Physics, BUET, Ukorsho, course" />
-    <meta property="og:title" content="Ukorsho BUET Physics" />
-    <meta
-      property="og:description"
-      content="Comprehensive Physics Course for BUET Preparation - Lectures, Tests, and Practice Materials"
-    />
-    <meta
-      property="og:image"
-      content="https://cn.edurev.in/AllImages/original/ApplicationImages/CourseImages/7b35dae9-6cf6-4002-888d-7e0648472936_CI.png"
-    />
-    <title>Ukorsho BUET Physics</title>
-    <link rel="icon" src="UtkorshoLogo.svg" type="image/x-icon" />
-    <link rel="stylesheet" href="styles.css">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utkorsho-Home</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
 
-  </head>
-  <body>
-    <!-- Header -->
-    <div class="header">
-      <div class="container">
-        <div class="logo">
-          <a class="flex items-center" href="/">
-            <img
-              alt="Utkorsho"
-              fetchpriority="high"
-              width="100"
-              height="38"
-              decoding="async"
-              data-nimg="1"
-              class="w-[90px] sm:[137px]"
-              src="UtkorshoLogo.svg"
-              style="color: transparent"
-            />
-          </a>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: #f4f4f4;
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            display: flex;
+            max-width: 1800px;
+            margin: 0 auto;
+            min-height: 100vh;
+            padding: 0 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            background: linear-gradient(180deg, #000000 0%, #22577A 100%);
+            padding: 20px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            flex-shrink: 0;
+        }
+
+        .sidebar-hidden {
+            transform: translateX(-100%);
+        }
+
+        .sidebar .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .sidebar .profile img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+        }
+
+        .sidebar .profile span {
+            font-size: 16px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .sidebar .logo a {
+            font-size: 24px;
+            font-weight: 700;
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .sidebar .menu {
+            list-style: none;
+            margin-top: 20px;
+            flex-grow: 1;
+        }
+
+        .sidebar .menu li {
+            margin-bottom: 15px;
+        }
+
+        .sidebar .menu li a {
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+
+        .sidebar .menu li a:hover {
+            background-color: #38A3A5;
+        }
+
+        .sidebar .menu li.active a {
+            background-color: #ffffff;
+            color: #22577A;
+            font-weight: 600;
+        }
+
+        .sidebar .logout a {
+            color: #ffffff;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 15px;
+            padding: 10px 15px;
+            border-radius: 8px;
+        }
+
+        .sidebar .logout a:hover {
+            background-color: #38A3A5;
+        }
+
+        /* Sidebar Toggle Arrow */
+        .sidebar-toggle {
+            position: fixed;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #ffffff;
+            border: 1px solid #ddd;
+            border-radius: 0 8px 8px 0;
+            padding: 10px 5px;
+            cursor: pointer;
+            z-index: 999;
+            transition: left 0.3s ease;
+        }
+
+        .sidebar-toggle.visible {
+            left: 250px;
+        }
+
+        /* Content */
+        .content {
+            flex: 1;
+            padding: 15px;
+            width: 100%;
+            transition: all 0.3s ease;
+        }
+
+        /* Header */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: #ffffff;
+            border-bottom: 1px solid #ddd;
+            position: sticky;
+            top: 0;
+            z-index: 998;
+        }
+
+        .header-left .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: #2c3e50;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .infinity-btn {
+            background: #22577A;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .header-right .icon {
+            color: #2c3e50;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        /* Hide hamburger on large screens, show on small screens */
+        .hamburger {
+            display: none;
+        }
+
+        @media (max-width: 767px) {
+            .sidebar-toggle {
+                display: none;
+            }
+            .hamburger {
+                display: inline-block;
+            }
+            .sidebar {
+                transform: translateX(-100%);
+            }
+            .sidebar.active {
+                transform: translateX(0);
+            }
+            .content {
+                width: 100%;
+            }
+            .main-container {
+                display: block;
+            }
+        }
+
+        @media (min-width: 1800px) {
+            .main-container {
+                padding: 0 40px;
+            }
+        }
+
+        /* Carousel Banner */
+        .banner-carousel {
+            position: relative;
+            overflow: hidden;
+            border-radius: 12px;
+            margin: 20px 0;
+        }
+
+        .banner-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .banner {
+            flex: 0 0 100%;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #38A3A5 0%, #80ED99 100%);
+            min-height: 150px;
+        }
+
+        .banner-content {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            width: 100%;
+            gap: 20px;
+        }
+
+        .banner-content .left-section {
+            flex: 1;
+            text-align: left;
+        }
+
+        .banner-content h2 {
+            font-size: 1.4rem;
+            margin-bottom: 5px;
+            color: #22577A;
+        }
+
+        .banner-content .early-bird {
+            font-size: 0.9rem;
+            color: #22577A;
+            font-weight: 600;
+        }
+
+        .banner-content .price-section {
+            flex: 1;
+            text-align: center;
+        }
+
+        .banner-content .price {
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        .banner-content .discount-price {
+            font-size: 1.6rem;
+            font-weight: 700;
+            color: #22577A;
+        }
+
+        .banner-content .original-price {
+            font-size: 0.85rem;
+            color: #718096;
+        }
+
+        .banner-content .discount-tag {
+            background: #C7F9CC;
+            color: #22577A;
+            padding: 3px 8px;
+            border-radius: 10px;
+            font-size: 0.8rem;
+        }
+
+        .banner-content .right-section {
+            flex: 1;
+            text-align: right;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 10px;
+        }
+
+        .banner-content .features {
+            list-style: none;
+            color: #22577A;
+            margin: 0;
+        }
+
+        .banner-content .features li {
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .banner-content .features i {
+            color: #38A3A5;
+            margin-right: 5px;
+        }
+
+        .join-btn {
+            background: #22577A;
+            color: white;
+            padding: 8px 15px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            font-size: 0.85rem;
+        }
+
+        .join-btn:hover {
+            background: #38A3A5;
+        }
+
+        .timer {
+            font-size: 0.75rem;
+            color: #22577A;
+            text-align: center;
+            margin-top: 5px;
+        }
+
+        /* Carousel Dots */
+        .carousel-dots {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 6px;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #C7F9CC;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .dot.active {
+            background: #22577A;
+        }
+
+        @media (max-width: 768px) {
+            .banner {
+                padding: 10px 15px;
+                min-height: 120px;
+            }
+            .banner-content {
+                gap: 10px;
+            }
+            .banner-content h2 {
+                font-size: 1.2rem;
+            }
+            .banner-content .early-bird {
+                font-size: 0.85rem;
+            }
+            .banner-content .discount-price {
+                font-size: 1.4rem;
+            }
+            .banner-content .original-price {
+                font-size: 0.8rem;
+            }
+            .banner-content .features li {
+                font-size: 0.8rem;
+            }
+            .join-btn {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .banner {
+                flex-direction: column;
+                padding: 10px;
+                min-height: 180px;
+            }
+            .banner-content {
+                flex-direction: column;
+                gap: 8px;
+            }
+            .banner-content .left-section,
+            .banner-content .price-section,
+            .banner-content .right-section {
+                text-align: center;
+                flex: none;
+            }
+            .banner-content h2 {
+                font-size: 1.1rem;
+            }
+            .banner-content .discount-price {
+                font-size: 1.3rem;
+            }
+            .banner-content .features {
+                margin-bottom: 5px;
+            }
+            .join-btn {
+                padding: 6px 10px;
+            }
+        }
+
+        /* Daily Routine Section */
+        .daily-routine {
+            margin: 20px 0;
+        }
+
+        .daily-routine-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .daily-routine-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #1E40AF;
+        }
+
+        .daily-routine-header .view-routine {
+            font-size: 0.9rem;
+            color: #1E40AF;
+            text-decoration: none;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .daily-routine-header .view-routine i {
+            margin-left: 5px;
+        }
+
+        .daily-routine-header p {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        .routine-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        /* Routine Carousel for Small Screens */
+        .routine-carousel {
+            position: relative;
+            overflow: hidden;
+            display: none;
+        }
+
+        .routine-slides {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+            width: 100%;
+        }
+
+        .routine-card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            flex: 0 0 100%;
+        }
+
+        .routine-card .category {
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #38A3A5;
+        }
+
+        .routine-card .category.physics {
+            color: #38A3A5;
+        }
+
+        .routine-card .category.english {
+            color: #2DD4BF;
+        }
+
+        .routine-card .category.doubt-solving-green {
+            color: #10B981;
+        }
+
+        .routine-card .category.doubt-solving-purple {
+            color: #8B5CF6;
+        }
+
+        .routine-card h3 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: #2d3748;
+            line-height: 1.4;
+        }
+
+        .routine-card .details {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.85rem;
+            color: #718096;
+        }
+
+        .routine-card .details i {
+            color: #718096;
+        }
+
+        .routine-card .view-details {
+            background: #E6F0FA;
+            color: #1E40AF;
+            text-align: center;
+            padding: 8px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            margin-top: auto;
+        }
+
+        @media (max-width: 768px) {
+            .routine-grid {
+                display: none;
+            }
+            .routine-carousel {
+                display: block;
+            }
+            .routine-card {
+                flex: 0 0 90%;
+                margin: 0 5%;
+            }
+        }
+
+        /* Calendar Popup */
+        .calendar-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .calendar-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .calendar-content {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .calendar-modal.active .calendar-content {
+            transform: scale(1);
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .calendar-header .month-nav {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .calendar-header .month-nav i {
+            cursor: pointer;
+            font-size: 1.2rem;
+            color: #1E40AF;
+            transition: color 0.3s ease;
+        }
+
+        .calendar-header .month-nav i:hover {
+            color: #3B82F6;
+        }
+
+        .calendar-header .month-nav span {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1E40AF;
+        }
+
+        .calendar-header .exam-type {
+            display: flex;
+            gap: 10px;
+        }
+
+        .calendar-header .exam-type label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 0.9rem;
+            color: #2d3748;
+        }
+
+        .calendar-header .exam-type input {
+            margin: 0;
+        }
+
+        .calendar-header .exam-goal {
+            font-size: 0.9rem;
+            color: #2d3748;
+        }
+
+        .calendar-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .calendar-table th {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: #2d3748;
+            padding: 10px;
+            text-align: center;
+        }
+
+        .calendar-table td {
+            padding: 10px;
+            text-align: center;
+            border: 1px solid #e2e8f0;
+            font-size: 0.85rem;
+            color: #2d3748;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .calendar-table td.today {
+            background: #f1ff58;
+            box-shadow: 0 0 10px rgba(30, 64, 175, 0.3);
+            font-weight: 600;
+        }
+
+        .calendar-table td .event {
+            background: #A7F3D0;
+            color: #1F2937;
+            padding: 5px;
+            border-radius: 5px;
+            margin-top: 5px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .calendar-table td .event:hover {
+            transform: scale(1.02);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-table td .event.physics {
+            background: #A7F3D0;
+        }
+
+        .calendar-table td .event.english {
+            background: #FECACA;
+        }
+
+        .calendar-table td .event.math {
+            background: #C3B1E1;
+        }
+
+        .calendar-table td .event.writing {
+            background: #BFDBFE;
+        }
+
+        .calendar-table td .event.discord {
+            background: #A5B4FC;
+        }
+
+        .calendar-table td .event i {
+            margin-left: 5px;
+            transition: transform 0.3s ease;
+        }
+
+        .calendar-table td .event.active i {
+            transform: rotate(180deg);
+        }
+
+        .calendar-table td .event-details {
+            display: none;
+            font-size: 0.7rem;
+            color: #4B5563;
+            margin-top: 5px;
+            padding: 5px;
+            background: #F9FAFB;
+            border-radius: 5px;
+        }
+
+        .calendar-table td .event.active .event-details {
+            display: block;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #2d3748;
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: #EF4444;
+        }
+
+        /* Responsive Calendar */
+        @media (max-width: 768px) {
+            .calendar-content {
+                padding: 15px;
+                max-width: 90%;
+            }
+
+            .calendar-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .calendar-header .month-nav {
+                margin-bottom: 10px;
+            }
+
+            .calendar-header .exam-type {
+                flex-direction: column;
+                gap: 5px;
+            }
+
+            .calendar-header .exam-goal {
+                margin-top: 10px;
+            }
+
+            .calendar-table th {
+                font-size: 0.75rem;
+                padding: 8px;
+            }
+
+            .calendar-table td {
+                padding: 8px;
+                font-size: 0.75rem;
+            }
+
+            .calendar-table td .event {
+                font-size: 0.65rem;
+                padding: 4px;
+            }
+
+            .calendar-table td .event-details {
+                font-size: 0.6rem;
+                padding: 4px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .calendar-content {
+                padding: 10px;
+            }
+
+            .calendar-header .month-nav span {
+                font-size: 1rem;
+            }
+
+            .calendar-header .month-nav i {
+                font-size: 1rem;
+            }
+
+            .calendar-header .exam-type label {
+                font-size: 0.8rem;
+            }
+
+            .calendar-header .exam-goal {
+                font-size: 0.8rem;
+            }
+
+            .calendar-table th {
+                font-size: 0.65rem;
+                padding: 6px;
+            }
+
+            .calendar-table td {
+                padding: 6px;
+                font-size: 0.65rem;
+            }
+
+            .calendar-table td .event {
+                font-size: 0.6rem;
+                padding: 3px;
+            }
+
+            .calendar-table td .event-details {
+                font-size: 0.55rem;
+                padding: 3px;
+            }
+
+            .close-modal {
+                font-size: 1.2rem;
+                top: 8px;
+                right: 8px;
+            }
+        }
+
+        /* My Streaks Modal */
+        .streaks-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .streaks-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .streaks-content {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            width: 90%;
+            max-width: 500px;
+            position: relative;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .streaks-modal.active .streaks-content {
+            transform: scale(1);
+        }
+
+        .streaks-content h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #2d3748;
+            margin-bottom: 15px;
+            background: #FFE4B5;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .streaks-content .progress-section {
+            margin-bottom: 20px;
+        }
+
+        .streaks-content .progress-section p {
+            font-size: 0.9rem;
+            color: #2d3748;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .streaks-content .progress-bar {
+            background: #e2e8f0;
+            border-radius: 5px;
+            height: 10px;
+            overflow: hidden;
+            margin-bottom: 5px;
+        }
+
+        .streaks-content .progress-bar .progress {
+            background: #38A3A5;
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+
+        .streaks-content .progress-section .progress-text {
+            font-size: 0.85rem;
+            color: #718096;
+            text-align: center;
+        }
+
+        .streaks-content .stats {
+            display: flex;
+            justify-content: space-between;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .streaks-content .stats .stat {
+            background: #F9FAFB;
+            border-radius: 8px;
+            padding: 10px;
+            flex: 1;
+            text-align: center;
+        }
+
+        .streaks-content .stats .stat i {
+            font-size: 1.2rem;
+            color: #38A3A5;
+            margin-bottom: 5px;
+        }
+
+        .streaks-content .stats .stat p {
+            font-size: 0.85rem;
+            color: #2d3748;
+            margin-bottom: 5px;
+        }
+
+        .streaks-content .stats .stat .value {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #1E40AF;
+        }
+
+        .streaks-content .explore-btn {
+            display: block;
+            background: #1E40AF;
+            color: white;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background 0.3s ease;
+        }
+
+        .streaks-content .explore-btn:hover {
+            background: #3B82F6;
+        }
+
+        /* Responsive My Streaks */
+        @media (max-width: 768px) {
+            .streaks-content {
+                padding: 15px;
+                max-width: 90%;
+            }
+
+            .streaks-content h2 {
+                font-size: 1.3rem;
+            }
+
+            .streaks-content .stats {
+                flex-direction: column;
+            }
+
+            .streaks-content .stats .stat {
+                padding: 8px;
+            }
+
+            .streaks-content .stats .stat p {
+                font-size: 0.8rem;
+            }
+
+            .streaks-content .stats .stat .value {
+                font-size: 1.1rem;
+            }
+
+            .streaks-content .explore-btn {
+                padding: 8px;
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .streaks-content {
+                padding: 10px;
+            }
+
+            .streaks-content h2 {
+                font-size: 1.2rem;
+            }
+
+            .streaks-content .progress-section p {
+                font-size: 0.85rem;
+            }
+
+            .streaks-content .progress-section .progress-text {
+                font-size: 0.8rem;
+            }
+
+            .streaks-content .stats .stat p {
+                font-size: 0.75rem;
+            }
+
+            .streaks-content .stats .stat .value {
+                font-size: 1rem;
+            }
+
+            .streaks-content .explore-btn {
+                padding: 6px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Courses Section */
+        .courses-section {
+            margin-top: 25px;
+        }
+
+        .courses-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            overflow-x: auto;
+        }
+
+        .tab {
+            background: #edf2f7;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .tab.active {
+            background: #22577A;
+            color: white;
+        }
+
+        .courses-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, 220px);
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .course-card {
+            display: flex;
+            flex-direction: column;
+            width: 220px;
+            height: 280px;
+            background: #ffffff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            align-items: center;
+        }
+
+        .course-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .course-card img {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            margin: 0 auto;
+        }
+
+        .course-card .card-content {
+            padding: 10px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            width: 100%;
+            text-align: center;
+        }
+
+        .course-card h3 {
+            font-size: 1rem;
+            color: #2d3748;
+            margin: 0;
+        }
+
+        .course-card .details {
+            font-size: 0.8rem;
+            color: #718096;
+            margin-top: 5px;
+        }
+
+        /* Responsive Design for Course Cards */
+        @media (max-width: 768px) {
+            .courses-grid {
+                grid-template-columns: repeat(auto-fit, 200px);
+            }
+            .course-card {
+                width: 200px;
+                height: 260px;
+            }
+            .course-card img {
+                width: 180px;
+                height: 180px;
+            }
+            .course-card h3 {
+                font-size: 0.95rem;
+            }
+            .course-card .details {
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .courses-grid {
+                grid-template-columns: repeat(auto-fit, 160px);
+            }
+            .course-card {
+                width: 160px;
+                height: 220px;
+            }
+            .course-card img {
+                width: 140px;
+                height: 140px;
+            }
+            .course-card h3 {
+                font-size: 0.9rem;
+            }
+            .course-card .details {
+                font-size: 0.7rem;
+            }
+        }
+
+        /* Quick Links */
+        .quick-links {
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
+
+        .quick-links h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            color: #2d3748;
+        }
+
+        .links-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 15px;
+        }
+
+        .link-card {
+            background: #e6fffa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .link-card a {
+            color: #22577A;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 220px;
+            }
+            .content {
+                padding: 10px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .sidebar {
+                width: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar sidebar-hidden" id="sidebar">
+            <div>
+                <ul class="menu">
+                    <li class="active"><a href="#"><i class="fas fa-home"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-user"></i> My Profile</a></li>
+                    <li><a href="#" id="openStreaks"><i class="fas fa-fire"></i> My Streaks</a></li>
+                    <li><a href="#"><i class="fas fa-search"></i> Explore Courses</a></li>
+                    <li><a href="#"><i class="fas fa-book"></i> Practice & Revise</a></li>
+                    <li><a href="#"><i class="fas fa-exchange-alt"></i> Change Exam</a></li>
+                    <li><a href="#"><i class="fas fa-dollar-sign"></i> Pricing Plans</a></li>
+                    <li><a href="#"><i class="fas fa-shopping-cart"></i> EduRev Store</a></li>
+                    <li><a href="#"><i class="fas fa-infinity"></i> EduRev Infinity</a></li>
+                    <li><a href="#"><i class="fas fa-headset"></i> Support</a></li>
+                </ul>
+            </div>
+            <div class="logout">
+                <a href="#"><i class="fas fa-sign-out-alt"></i> Logout</a>
+            </div>
         </div>
-      </div>
+
+        <!-- Sidebar Toggle Arrow -->
+        <div class="sidebar-toggle" id="sidebarToggle">
+            <i class="fas fa-arrow-right"></i>
+        </div>
+
+        <!-- Main Content -->
+        <div class="content" id="content">
+            <!-- Header -->
+            <header>
+                <div class="header-left">
+                    <a href="#" class="logo"><img src="UtkorshoLogo.svg" alt="Utkorsho Logo" style="height: 40px;"></a>
+                </div>
+                <div class="header-right">
+                    <button class="infinity-btn">Get Infinity</button>
+                    <a href="#" class="icon"><i class="fas fa-search"></i></a>
+                    <a href="#" class="icon"><i class="fas fa-bell"></i></a>
+                    <a href="#" class="icon hamburger" id="mobileToggle"><i class="fas fa-bars"></i></a>
+                </div>
+            </header>
+
+            <!-- Carousel Banner -->
+            <div class="banner-carousel">
+                <div class="banner-slides" id="bannerSlides">
+                    <!-- Slide 1: Engineering + Biology Admission Program 2025 -->
+                    <div class="banner">
+                        <div class="banner-content">
+                            <div class="left-section">
+                                <h2>Engineering + Biology Admission 2025</h2>
+                                <p class="early-bird">Early Bird – Limited Seats!</p>
+                            </div>
+                            <div class="price-section">
+                                <p class="price">
+                                    <span class="discount-price">৳ 3500</span>
+                                    <span class="original-price"><s>৳ 10000</s></span>
+                                    <span class="discount-tag">65% OFF</span>
+                                </p>
+                                <p class="timer">Ends in: <span id="timer1">32h 23m 29s</span></p>
+                            </div>
+                            <div class="right-section">
+                                <ul class="features">
+                                    <li><i class="fas fa-check-circle"></i> Live Classes</li>
+                                    <li><i class="fas fa-check-circle"></i> 500+ Hours Video</li>
+                                    <li><i class="fas fa-check-circle"></i> Mock Tests</li>
+                                </ul>
+                                <button class="join-btn">Enroll Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2: HSC 2026 Module 02 - PCMB-EB Bundle -->
+                    <div class="banner">
+                        <div class="banner-content">
+                            <div class="left-section">
+                                <h2>HSC 2026 PCMB-EB Bundle (6 Subjects)</h2>
+                                <p class="early-bird">Early Prep Advantage!</p>
+                            </div>
+                            <div class="price-section">
+                                <p class="price">
+                                    <span class="discount-price">৳ 3800</span>
+                                    <span class="original-price"><s>৳ 5600</s></span>
+                                    <span class="discount-tag">32% OFF</span>
+                                </p>
+                                <p class="timer">Ends in: <span id="timer2">32h 23m 29s</span></p>
+                            </div>
+                            <div class="right-section">
+                                <ul class="features">
+                                    <li><i class="fas fa-check-circle"></i> PCMB Subjects</li>
+                                    <li><i class="fas fa-check-circle"></i> 300+ Hours Video</li>
+                                    <li><i class="fas fa-check-circle"></i> Expert Guidance</li>
+                                </ul>
+                                <button class="join-btn">Enroll Now</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3: HSC 2025 Game Changer | 7 Subjects Bundle -->
+                    <div class="banner">
+                        <div class="banner-content">
+                            <div class="left-section">
+                                <h2>HSC 2025 Game Changer (7 Subjects)</h2>
+                                <p class="early-bird">Ace Your Exams!</p>
+                            </div>
+                            <div class="price-section">
+                                <p class="price">
+                                    <span class="discount-price">৳ 1990</span>
+                                    <span class="original-price"><s>৳ 5000</s></span>
+                                    <span class="discount-tag">60% OFF</span>
+                                </p>
+                                <p class="timer">Ends in: <span id="timer3">32h 23m 29s</span></p>
+                            </div>
+                            <div class="right-section">
+                                <ul class="features">
+                                    <li><i class="fas fa-check-circle"></i> 7 Subjects</li>
+                                    <li><i class="fas fa-check-circle"></i> 400+ Hours Content</li>
+                                    <li><i class="fas fa-check-circle"></i> Mock Exams</li>
+                                </ul>
+                                <button class="join-btn">Enroll Now</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Carousel Dots -->
+                <div class="carousel-dots" id="carouselDots">
+                    <span class="dot active" data-slide="0"></span>
+                    <span class="dot" data-slide="1"></span>
+                    <span class="dot" data-slide="2"></span>
+                </div>
+            </div>
+
+            <!-- Daily Routine Section -->
+            <div class="daily-routine">
+                <div class="daily-routine-header">
+                    <div>
+                        <h2>আজকের রুটিন</h2>
+                        <p>তোমার প্রতিদিনের রুটিন দেখে নাও</p>
+                    </div>
+                    <a class="view-routine" id="openCalendar">রুটিন দেখা <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div class="routine-grid" id="routineGrid">
+                    <div class="routine-card">
+                        <p class="category physics">ভাষাগত পরীক্ষা - MCQ + CQ</p>
+                        <h3>Physics Exam 22 (অধ্যায়িক পরিবীক্ষণের সূত্র)</h3>
+                        <p class="details"><i class="fas fa-calendar-alt"></i> ২২ মার্চ, শনিবার | সকাল ০৪:০০ - সকাল ০৬:০০</p>
+                        <a href="#" class="view-details">বিস্তারিত দেখা</a>
+                    </div>
+                    <div class="routine-card">
+                        <p class="category english">ইংরেজি ১ম পত্র - লেকচার ক্লাস</p>
+                        <h3>English 1st Paper Writing - 2 (Write a paragraph answering questions, Writing Informal letters & emails)</h3>
+                        <p class="details"><i class="fas fa-calendar-alt"></i> ২২ মার্চ, শনিবার | সকাল ০৮:০০ - সকাল ০৯:০০</p>
+                        <a href="#" class="view-details">বিস্তারিত দেখা</a>
+                    </div>
+                    <div class="routine-card">
+                        <p class="category doubt-solving-green">ডাউট সলভিং - একটি ক্লাস</p>
+                        <h3>Doubt Solving (ডিজিটাল মাধ্যমে + পড়ার বিষয়ে ও শিক্ষণীয় + অভ্যাস + মানে সমাধান ও শিক্ষণীয় + অপেক্ষাকৃত পরীক্ষা + জ্ঞানতত্ত্ব ও বিবর্তন)</h3>
+                        <p class="details"><i class="fas fa-calendar-alt"></i> ২২ মার্চ, শনিবার | বিকেল ০৬:০০ - বিকেল ০৭:০০</p>
+                        <a href="#" class="view-details">বিস্তারিত দেখা</a>
+                    </div>
+                    <div class="routine-card">
+                        <p class="category doubt-solving-purple">উচ্চতর গণিত ১ম পত্র - একটি ক্লাস</p>
+                        <h3>Doubt Solving (কৌণিক + ভৌগোলিক ও ভৌগোলিক সমীকরণ + পৃথিবী ও বিবর্তন ও ব্যাখ্যানমূলক সমাধান + মাধ্যমে বক্রকার গতি)</h3>
+                        <p class="details"><i class="fas fa-calendar-alt"></i> ২২ মার্চ, শনিবার | বিকেল ০৬:০০ - বিকেল ০৭:০০</p>
+                        <a href="#" class="view-details">বিস্তারিত দেখা</a>
+                    </div>
+                </div>
+                <div class="routine-carousel" id="routineCarousel">
+                    <div class="routine-slides" id="routineSlides">
+                        <div class="routine-card">
+                            <p class="category physics">ভাষাগত পরীক্ষা - MCQ + CQ</p>
+                            <h3>Physics Exam 22 (অধ্যায়িক পরিবীক্ষণের সূত্র)</h3>
+                            <p class="details"><i class="fas fa-calendar-alt"></i> ২২ মার্চ, শনিবার | সকাল ০৪:০০ - সকাল ০৬:০০</p>
+                            <a href="#" class="view-details">বিস্তারিত দেখা</a>
+                        </div>
+                        <div class="routine-card">
+                            <p class="category english">ইংরেজি ১ম পত্র - লেকচার ক্লাস</p>
+                            <h3>English 1st Paper Writing - 2 (Write a paragraph answering questions, Writing Informal letters & emails)</h3>
+                            <p class="details"><i class="fas fa-calendar-alt"></i> ২২ মার্চ, শনিবার | সকাল ০৮:০০ - সকাল ০৯:০০</p>
+                            <a href="#" class="view-details">বিস্তারিত দেখা</a>
+                        </div>
+                        <div class="routine-card">
+                            <p class="category doubt-solving-green">ডাউট সলভিং - একটি ক্লাস</p>
+                            <h3>Doubt Solving (ডিজিটাল মাধ্যমে + পড়ার বিষয়ে ও শিক্ষণীয় + অভ্যাস + মানে সমাধান ও শিক্ষণীয় + অপেক্ষাকৃত পরীক্ষা + জ্ঞানতত্ত্ব ও বিবর্তন)</h3>
+                            <p class="details"><i class="fas fa-calendar-alt"></i> ২২ মার্চ, শনিবার | বিকেল ০৬:০০ - বিকেল ০৭:০০</p>
+                            <a href="#" class="view-details">বিস্তারিত দেখা</a>
+                        </div>
+                        <div class="routine-card">
+                            <p class="category doubt-solving-purple">উচ্চতর গণিত ১ম পত্র - একটি ক্লাস</p>
+                            <h3>Doubt Solving (কৌণিক + ভৌগোলিক ও ভৌগোলিক সমীকরণ + পৃথিবী ও বিবর্তন ও ব্যাখ্যানমূলক সমাধান + মাধ্যমে বক্রকার গতি)</h3>
+                            <p class="details"><i class="fas fa-calendar-alt"></i> ২২ মার্চ, শনিবার | বিকেল ০৬:০০ - বিকেল ০৭:০০</p>
+                            <a href="#" class="view-details">বিস্তারিত দেখা</a>
+                        </div>
+                    </div>
+                    <div class="carousel-dots" id="routineDots">
+                        <span class="dot active" data-slide="0"></span>
+                        <span class="dot" data-slide="1"></span>
+                        <span class="dot" data-slide="2"></span>
+                        <span class="dot" data-slide="3"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Calendar Popup -->
+            <div class="calendar-modal" id="calendarModal">
+                <div class="calendar-content">
+                    <span class="close-modal" id="closeModal">×</span>
+                    <div class="calendar-header">
+                        <div class="month-nav">
+                            <i class="fas fa-chevron-left" id="prevMonth"></i>
+                            <span id="currentMonth">মার্চ ২০২৫</span>
+                            <i class="fas fa-chevron-right" id="nextMonth"></i>
+                        </div>
+                        <div class="exam-type">
+                            <label><input type="radio" name="examType" checked> একাডেমিক পরীক্ষা</label>
+                            <label><input type="radio" name="examType"> জানার কৌতূহল</label>
+                        </div>
+                        <div class="exam-goal">
+                            লক্ষ্য: GPA-5 HSC '25
+                        </div>
+                    </div>
+                    <table class="calendar-table">
+                        <thead>
+                            <tr>
+                                <th>রবিবার</th>
+                                <th>সোমবার</th>
+                                <th>মঙ্গলবার</th>
+                                <th>বুধবার</th>
+                                <th>বৃহস্পতিবার</th>
+                                <th>শুক্রবার</th>
+                                <th>শনিবার</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calendarBody">
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td>১<br><div class="event physics">ভাষাগত পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: MCQ + CQ on Mechanics</div></div></td>
+                            </tr>
+                            <tr>
+                                <td>২<br><div class="event physics">ভাষাগত পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: MCQ + CQ on Mechanics</div></div></td>
+                                <td>৩<br><div class="event physics">ভাষাগত পরীক্ষা<br>১০ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Intensive Revision</div></div></td>
+                                <td>৪<br><div class="event physics">ভাষাগত পরীক্ষা<br>১০ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Intensive Revision</div></div></td>
+                                <td>৫<br><div class="event physics">ভাষাগত পরীক্ষা<br>১০ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Intensive Revision</div></div></td>
+                                <td>৬<br><div class="event english">ইংরেজি পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Writing Practice</div></div></td>
+                                <td>৭<br><div class="event physics">ভাষাগত পরীক্ষা<br>১০ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Intensive Revision</div></div></td>
+                                <td>৮<br><div class="event math">গণিত পরীক্ষা<br>১০ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Algebra and Geometry</div></div></td>
+                            </tr>
+                            <tr>
+                                <td>৯<br><div class="event physics">ভাষাগত পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: MCQ + CQ on Mechanics</div></div></td>
+                                <td>১০<br><div class="event physics">ভাষাগত পরীক্ষা<br>১০ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Intensive Revision</div></div></td>
+                                <td>১১<br><div class="event physics">ভাষাগত পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: MCQ + CQ on Mechanics</div></div></td>
+                                <td>১২<br><div class="event physics">ভাষাগত পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: MCQ + CQ on Mechanics</div></div></td>
+                                <td>১৩<br><div class="event physics">ভাষাগত পরীক্ষা<br>১০ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Intensive Revision</div></div></td>
+                                <td>১৪<br><div class="event physics">ভাষাগত পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: MCQ + CQ on Mechanics</div></div></td>
+                                <td>১৫<br><div class="event physics">ভাষাগত পরীক্ষা<br>১০ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Intensive Revision</div></div></td>
+                            </tr>
+                            <tr>
+                                <td>১৬<br><div class="event physics">ভাষাগত পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: MCQ + CQ on Mechanics</div></div></td>
+                                <td>১৭<br><div class="event physics">ভাষাগত পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: MCQ + CQ on Mechanics</div></div></td>
+                                <td>১৮<br><div class="event physics">ভাষাগত পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: MCQ + CQ on Mechanics</div></div></td>
+                                <td>১৯<br><div class="event physics">ভাষাগত পরীক্ষা<br>১০ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Intensive Revision</div></div></td>
+                                <td>২০<br><div class="event physics">ভাষাগত পরীক্ষা<br>১০ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Intensive Revision</div></div></td>
+                                <td>২১<br><div class="event physics">ভাষাগত পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: MCQ + CQ on Mechanics</div></div></td>
+                                <td class="today">২২<br><div class="event english">ইংরেজি পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Writing Practice</div></div></td>
+                            </tr>
+                            <tr>
+                                <td>২৩<br><div class="event physics">ভাষাগত পরীক্ষা<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: MCQ + CQ on Mechanics</div></div></td>
+                                <td>২৪<br><div class="event writing">Writing<br>২ ঘন্টা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Essay Writing</div></div></td>
+                                <td>২৫<br><div class="event physics">একাডেমিক পরীক্ষা<i class="fas fa-chevron-down"></i><div class="event-details">Details: Full Mock Test</div></div></td>
+                                <td>২৬<br><div class="event discord">Discord<i class="fas fa-chevron-down"></i><div class="event-details">Details: Community Discussion</div></div></td>
+                                <td>২৭</td>
+                                <td>২৮</td>
+                                <td>২৯</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- My Streaks Modal -->
+            <div class="streaks-modal" id="streaksModal">
+                <div class="streaks-content">
+                    <span class="close-modal" id="closeStreaks">×</span>
+                    <h2>Today's streak progress</h2>
+                    <div class="progress-section">
+                        <p>Study 10 minutes to build today's streak</p>
+                        <div class="progress-bar">
+                            <div class="progress" id="streakProgress"></div>
+                        </div>
+                        <p class="progress-text">YOUR PROGRESS: <span id="progressMinutes">0</span> MINS</p>
+                    </div>
+                    <div class="stats">
+                        <div class="stat">
+                            <i class="fas fa-fire"></i>
+                            <p>Best Streak</p>
+                            <p class="value">2</p>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Total Learning Days</p>
+                            <p class="value">2</p>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-clock"></i>
+                            <p>Total Learning Time</p>
+                            <p class="value">32m</p>
+                        </div>
+                    </div>
+                    <a href="#" class="explore-btn">Explore ALL EXAMS <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- Courses Section -->
+            <div class="courses-section">
+                <h2>My Courses</h2>
+                <div class="tabs">
+                    <button class="tab active">ALL COURSES</button>
+                    <button class="tab">MAIN SUBJECTS</button>
+                    <button class="tab">MOCK TESTS</button>
+                    <button class="tab">GUIDANCE</button>
+                    <button class="tab">REVISION</button>
+                    <button class="tab">PRACTICE</button>
+                    <button class="tab">CUET</button>
+                    <button class="tab">REFERENCE BOOKS</button>
+                </div>
+                <div class="courses-grid">
+                    <a href="Ukorsho BUET Physics.html" class="course-card">
+                        <img src="Physics.avif" alt="Physics">
+                        <div class="card-content">
+                            <h3>Utkorsho BUET Physics</h3>
+                            <p class="details">50+ Lessons</p>
+                        </div>
+                    </a>
+                    <a href="/math" class="course-card">
+                        <img src="Math.avif" alt="Math">
+                        <div class="card-content">
+                            <h3>Utkorsho BUET Math</h3>
+                            <p class="details">60+ Lessons</p>
+                        </div>
+                    </a>
+                    <a href="/chemistry" class="course-card">
+                        <img src="Chemistry.avif" alt="Chemistry">
+                        <div class="card-content">
+                            <h3>Utkorsho BUET Chemistry</h3>
+                            <p class="details">45+ Lessons</p>
+                        </div>
+                    </a>
+                    <a href="/study-planner" class="course-card">
+                        <img src="https://source.unsplash.com/300x150/?study" alt="Study Planner">
+                        <div class="card-content">
+                            <h3>Utkorsho Study Planner For BUET</h3>
+                            <p class="details">Daily Tasks</p>
+                        </div>
+                    </a>
+                    <a href="/mock-tests" class="course-card">
+                        <img src="https://source.unsplash.com/300x150/?exam" alt="Mock Tests">
+                        <div class="card-content">
+                            <h3>Mock Tests for BUET</h3>
+                            <p class="details">20+ Tests</p>
+                        </div>
+                    </a>
+                    <a href="/problem-solving" class="course-card">
+                        <img src="https://source.unsplash.com/300x150/?problem-solving" alt="Problem Solving">
+                        <div class="card-content">
+                            <h3>Problem Solving</h3>
+                            <p class="details">100+ Problems</p>
+                        </div>
+                    </a>
+                    <a href="/practice-tests" class="course-card">
+                        <img src="https://source.unsplash.com/300x150/?practice" alt="Practice Tests">
+                        <div class="card-content">
+                            <h3>Practice Tests</h3>
+                            <p class="details">30+ Tests</p>
+                        </div>
+                    </a>
+                    <a href="/crash-course" class="course-card">
+                        <img src="https://source.unsplash.com/300x150/?crash-course" alt="Crash Course">
+                        <div class="card-content">
+                            <h3>Crash course for BUET</h3>
+                            <p class="details">Intensive Prep</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Quick Links -->
+            <div class="quick-links">
+                <h2>Quick Links</h2>
+                <div class="links-grid">
+                    <div class="link-card">
+                        <a href="#">Previous Year Papers</a>
+                    </div>
+                    <div class="link-card">
+                        <a href="#">Formula Sheets</a>
+                    </div>
+                    <div class="link-card">
+                        <a href="#">Video Lectures</a>
+                    </div>
+                    <div class="link-card">
+                        <a href="#">Study Notes</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="content">
-      <div class="container">
-        <div class="course-header">
-          <img
-            src="https://cn.edurev.in/AllImages/original/ApplicationImages/CourseImages/7b35dae9-6cf6-4002-888d-7e0648472936_CI.png"
-            alt="Course Image"
-          />
-          <div class="info">
-            <h1>Ukorsho BUET Physics</h1>
-            <span style="color: #ffffff; font-size: 12px"
-              >Empowering Future Engineers with Physics Excellence</span
-            >
-          </div>
-        </div>
-        <!-- Filter Bar -->
-        <div class="filter-bar">
-          <button class="filter-btn active" data-filter="all">
-            All Chapters
-          </button>
-          <button class="filter-btn" data-filter="first-paper">
-            পদার্থবিজ্ঞান প্রথম পত্র
-          </button>
-          <button class="filter-btn" data-filter="second-paper">
-            পদার্থবিজ্ঞান দ্বিতীয় পত্র
-          </button>
-        </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Banner Carousel
+            const bannerSlides = document.getElementById('bannerSlides');
+            const bannerDots = document.querySelectorAll('#carouselDots .dot');
+            let currentBannerSlide = 0;
+            const totalBannerSlides = 3;
 
-        <div class="course-content">
-          <!-- Physics 1st Paper Chapters -->
-          <div class="section-separator" id="first-paper">
-            Physics 1st Paper
-          </div>
-          <div class="chapter" data-paper="first-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">01</td>
-                <td>
-                  <div class="chapter-title">
-                    ভৌত জগত ও পরিমাপ
-                    <span class="paper-tag first-paper">1st Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/7 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        HC Verma Solutions: Chapter 1 - Introduction to Physics
-                      </div>
-                      <div class="resource-meta">Doc | 4 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        DC Pandey Solutions: Measurement & Errors
-                      </div>
-                      <div class="resource-meta">Doc | 7 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        PPT: Units & Measurements
-                      </div>
-                      <div class="resource-meta">Doc | 50 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Test: Dimensions of Physical Quantities
-                      </div>
-                      <div class="resource-meta">Test | 20 Ques | 20 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        3 Days Timetable: Units & Measurements
-                      </div>
-                      <div class="resource-meta">Doc | 2 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Introduction to Units & Measurements
-                      </div>
-                      <div class="resource-meta">Doc | 11 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Dimensions & Measurements
-                      </div>
-                      <div class="resource-meta">Doc | 10 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="first-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">02</td>
-                <td>
-                  <div class="chapter-title">
-                    ভেক্টর <span class="paper-tag first-paper">1st Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/5 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Introduction to Vectors</div>
-                      <div class="resource-meta">Doc | 8 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Vector Operations</div>
-                      <div class="resource-meta">Doc | 30 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Vector Addition</div>
-                      <div class="resource-meta">Test | 15 Ques | 15 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Vector Components Guide</div>
-                      <div class="resource-meta">Doc | 6 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Revision Notes: Vectors</div>
-                      <div class="resource-meta">Doc | 5 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="first-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">03</td>
-                <td>
-                  <div class="chapter-title">
-                    গতিবিদ্যা
-                    <span class="paper-tag first-paper">1st paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Kinematics Basics</div>
-                      <div class="resource-meta">Doc | 10 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Motion Equations</div>
-                      <div class="resource-meta">Doc | 40 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Test: Kinematics Problems
-                      </div>
-                      <div class="resource-meta">Test | 20 Ques | 20 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Kinematics
-                      </div>
-                      <div class="resource-meta">Doc | 7 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="first-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">04</td>
-                <td>
-                  <div class="chapter-title">
-                    নিউটনিয়ান বলবিদ্যা
-                    <span class="paper-tag first-paper">1st Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Newton's Laws Overview</div>
-                      <div class="resource-meta">Doc | 12 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Forces and Motion</div>
-                      <div class="resource-meta">Doc | 35 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Newton's Laws</div>
-                      <div class="resource-meta">Test | 20 Ques | 20 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Mechanics
-                      </div>
-                      <div class="resource-meta">Doc | 8 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="first-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">05</td>
-                <td>
-                  <div class="chapter-title">
-                    কাজ, শক্তি ও ক্ষমতা
-                    <span class="paper-tag first-paper">1st Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Work and Energy Basics</div>
-                      <div class="resource-meta">Doc | 9 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Energy Conservation</div>
-                      <div class="resource-meta">Doc | 25 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Work and Power</div>
-                      <div class="resource-meta">Test | 15 Ques | 15 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Revision Notes: Energy</div>
-                      <div class="resource-meta">Doc | 6 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="first-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">06</td>
-                <td>
-                  <div class="chapter-title">
-                    মহাকর্ষ ও অভিকর্ষ
-                    <span class="paper-tag first-paper">1st Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Gravitation Fundamentals</div>
-                      <div class="resource-meta">Doc | 10 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        PPT: Gravitational Fields
-                      </div>
-                      <div class="resource-meta">Doc | 30 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Test: Gravitational Forces
-                      </div>
-                      <div class="resource-meta">Test | 20 Ques | 20 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Gravitation
-                      </div>
-                      <div class="resource-meta">Doc | 7 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="first-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">07</td>
-                <td>
-                  <div class="chapter-title">
-                    পদার্থের গাঠনিক ধর্ম
-                    <span class="paper-tag first-paper">1st Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Properties of Matter Intro
-                      </div>
-                      <div class="resource-meta">Doc | 8 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        PPT: Elasticity and Viscosity
-                      </div>
-                      <div class="resource-meta">Doc | 28 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Test: Properties of Matter
-                      </div>
-                      <div class="resource-meta">Test | 15 Ques | 15 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Matter Properties
-                      </div>
-                      <div class="resource-meta">Doc | 5 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="first-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">08</td>
-                <td>
-                  <div class="chapter-title">
-                    পর্যাবৃত্তিক গতি
-                    <span class="paper-tag first-paper">1st Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Simple Harmonic Motion Basics
-                      </div>
-                      <div class="resource-meta">Doc | 9 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Oscillations</div>
-                      <div class="resource-meta">Doc | 32 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: SHM Problems</div>
-                      <div class="resource-meta">Test | 20 Ques | 20 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Periodic Motion
-                      </div>
-                      <div class="resource-meta">Doc | 6 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="first-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">09</td>
-                <td>
-                  <div class="chapter-title">
-                    তরঙ্গ <span class="paper-tag first-paper">1st Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Wave Motion Introduction</div>
-                      <div class="resource-meta">Doc | 10 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Wave Properties</div>
-                      <div class="resource-meta">Doc | 30 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Test: Wave Characteristics
-                      </div>
-                      <div class="resource-meta">Test | 15 Ques | 15 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Revision Notes: Waves</div>
-                      <div class="resource-meta">Doc | 7 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="first-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">10</td>
-                <td>
-                  <div class="chapter-title">
-                    আদর্শ গ্যাস ও গ্যাসের গতিতত্ত্ব
-                    <span class="paper-tag first-paper">1st Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Ideal Gas Laws</div>
-                      <div class="resource-meta">Doc | 8 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        PPT: Kinetic Theory of Gases
-                      </div>
-                      <div class="resource-meta">Doc | 25 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Gas Laws</div>
-                      <div class="resource-meta">Test | 20 Ques | 20 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Kinetic Theory
-                      </div>
-                      <div class="resource-meta">Doc | 6 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <!-- Physics 2nd Paper Chapters -->
-          <div class="section-separator" id="second-paper">
-            Physics 2nd Paper
-          </div>
-          <div class="chapter" data-paper="second-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">11</td>
-                <td>
-                  <div class="chapter-title">
-                    তাপগতিবিদ্যা
-                    <span class="paper-tag second-paper">2nd Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Thermodynamics Basics</div>
-                      <div class="resource-meta">Doc | 10 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        PPT: Laws of Thermodynamics
-                      </div>
-                      <div class="resource-meta">Doc | 30 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Thermodynamics</div>
-                      <div class="resource-meta">Test | 20 Ques | 20 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Thermodynamics
-                      </div>
-                      <div class="resource-meta">Doc | 7 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="second-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">12</td>
-                <td>
-                  <div class="chapter-title">
-                    স্থির তড়িৎ
-                    <span class="paper-tag second-paper">2nd Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Electrostatics Introduction
-                      </div>
-                      <div class="resource-meta">Doc | 9 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Electric Fields</div>
-                      <div class="resource-meta">Doc | 28 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Electrostatics</div>
-                      <div class="resource-meta">Test | 15 Ques | 15 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Electrostatics
-                      </div>
-                      <div class="resource-meta">Doc | 6 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="second-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">13</td>
-                <td>
-                  <div class="chapter-title">
-                    চলতড়িৎ <span class="paper-tag second-paper">2nd Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Current Electricity Basics
-                      </div>
-                      <div class="resource-meta">Doc | 10 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Ohm's Law</div>
-                      <div class="resource-meta">Doc | 30 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Test: Current Electricity
-                      </div>
-                      <div class="resource-meta">Test | 20 Ques | 20 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Revision Notes: Current</div>
-                      <div class="resource-meta">Doc | 7 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="second-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">14</td>
-                <td>
-                  <div class="chapter-title">
-                    তড়িৎ প্রবাহের চৌম্বক ক্রিয়া ও চৌম্বকত্ব
-                    <span class="paper-tag second-paper">2nd Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Magnetic Effects Intro</div>
-                      <div class="resource-meta">Doc | 9 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Magnetic Fields</div>
-                      <div class="resource-meta">Doc | 28 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Magnetic Effects</div>
-                      <div class="resource-meta">Test | 15 Ques | 15 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Magnetism
-                      </div>
-                      <div class="resource-meta">Doc | 6 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="second-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">15</td>
-                <td>
-                  <div class="chapter-title">
-                    তড়িৎ চৌম্বকীয় আবেশ ও পরিবর্তী প্রবাহ
-                    <span class="paper-tag second-paper">2nd Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Electromagnetic Induction
-                      </div>
-                      <div class="resource-meta">Doc | 10 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Faraday's Law</div>
-                      <div class="resource-meta">Doc | 30 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Test: Electromagnetic Induction
-                      </div>
-                      <div class="resource-meta">Test | 20 Ques | 20 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Revision Notes: EMI</div>
-                      <div class="resource-meta">Doc | 7 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="second-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">16</td>
-                <td>
-                  <div class="chapter-title">
-                    জ্যামিতিক আলোকবিজ্ঞান
-                    <span class="paper-tag second-paper">2nd Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Geometric Optics Intro</div>
-                      <div class="resource-meta">Doc | 8 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        PPT: Reflection and Refraction
-                      </div>
-                      <div class="resource-meta">Doc | 25 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Geometric Optics</div>
-                      <div class="resource-meta">Test | 15 Ques | 15 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Revision Notes: Optics</div>
-                      <div class="resource-meta">Doc | 6 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="second-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">17</td>
-                <td>
-                  <div class="chapter-title">
-                    ভৌত আলোকবিজ্ঞান
-                    <span class="paper-tag second-paper">2nd Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Physical Optics Basics</div>
-                      <div class="resource-meta">Doc | 9 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        PPT: Interference and Diffraction
-                      </div>
-                      <div class="resource-meta">Doc | 28 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Physical Optics</div>
-                      <div class="resource-meta">Test | 15 Ques | 15 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Physical Optics
-                      </div>
-                      <div class="resource-meta">Doc | 6 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="second-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">18</td>
-                <td>
-                  <div class="chapter-title">
-                    আধুনিক পদার্থবিজ্ঞানের সূচনা
-                    <span class="paper-tag second-paper">2nd Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Modern Physics Introduction
-                      </div>
-                      <div class="resource-meta">Doc | 8 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Quantum Mechanics</div>
-                      <div class="resource-meta">Doc | 25 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Modern Physics</div>
-                      <div class="resource-meta">Test | 15 Ques | 15 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Modern Physics
-                      </div>
-                      <div class="resource-meta">Doc | 6 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="second-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">19</td>
-                <td>
-                  <div class="chapter-title">
-                    পরমাণুর মডেল ও নিউক্লীয় পদার্থবিজ্ঞান
-                    <span class="paper-tag second-paper">2nd Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Atomic Models Overview</div>
-                      <div class="resource-meta">Doc | 9 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Nuclear Physics</div>
-                      <div class="resource-meta">Doc | 28 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Nuclear Physics</div>
-                      <div class="resource-meta">Test | 15 Ques | 15 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Atomic Models
-                      </div>
-                      <div class="resource-meta">Doc | 6 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="second-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">20</td>
-                <td>
-                  <div class="chapter-title">
-                    সেমিকন্ডাক্টর ও ইলেকট্রনিক্স
-                    <span class="paper-tag second-paper">2nd Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Semiconductors Basics</div>
-                      <div class="resource-meta">Doc | 8 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        PPT: Diodes and Transistors
-                      </div>
-                      <div class="resource-meta">Doc | 25 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Semiconductors</div>
-                      <div class="resource-meta">Test | 15 Ques | 15 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Electronics
-                      </div>
-                      <div class="resource-meta">Doc | 6 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-          <div class="chapter" data-paper="second-paper">
-            <table class="chapter-row">
-              <tr>
-                <td class="chapter-number">21</td>
-                <td class="chapter-title-cell">
-                  <div class="chapter-title">
-                    জ্যোতির্বিজ্ঞান
-                    <span class="paper-tag second-paper">2nd Paper</span>
-                  </div>
-                  <div class="progress">
-                    <span class="done-count">0/4 Done</span> |
-                    <span class="percent-complete">0% Completed</span>
-                  </div>
-                </td>
-                <td style="width: 26px">
-                  <img
-                    src="https://cn.edurev.in/cdn_assets/v334/assets/img/course/coursubclose_v2.png"
-                    alt="Arrow"
-                    class="arrow"
-                    style="width: 24px"
-                  />
-                </td>
-              </tr>
-            </table>
-            <div class="subcontent-table">
-              <table>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Astronomy Introduction</div>
-                      <div class="resource-meta">Doc | 8 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/337/337946.png"
-                      alt="PPT Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">PPT: Stars and Galaxies</div>
-                      <div class="resource-meta">Doc | 25 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/2985/2985150.png"
-                      alt="Test Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">Test: Astronomy Basics</div>
-                      <div class="resource-meta">Test | 15 Ques | 15 min</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>
-                    <img
-                      src="https://cdn-icons-png.flaticon.com/512/136/136522.png"
-                      alt="Doc Icon"
-                      class="resource-icon"
-                    />
-                    <div class="resource-info">
-                      <div class="resource-title">
-                        Revision Notes: Astronomy
-                      </div>
-                      <div class="resource-meta">Doc | 6 pages</div>
-                    </div>
-                  </td>
-                  <td style="width: 120px; text-align: right">
-                    <span
-                      class="resource-status status-unlock"
-                      data-status="unlock"
-                      >Mark as Viewed</span
-                    >
-                  </td>
-                </tr>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+            function showBannerSlide(index) {
+                bannerSlides.style.transform = `translateX(-${index * 100}%)`;
+                bannerDots.forEach(dot => dot.classList.remove('active'));
+                bannerDots[index].classList.add('active');
+                currentBannerSlide = index;
+            }
 
-    <!-- Footer -->
-    <div class="footer">
-      <div class="container">
-        <p>&copy; 2025 Ukorsho. All rights reserved.</p>
-      </div>
-    </div>
+            bannerDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const slideIndex = parseInt(dot.getAttribute('data-slide'));
+                    showBannerSlide(slideIndex);
+                });
+            });
 
-    <!-- JavaScript for Interactivity -->
-    <script src="script.js"></script>
-  </body>
+            setInterval(() => {
+                currentBannerSlide = (currentBannerSlide + 1) % totalBannerSlides;
+                showBannerSlide(currentBannerSlide);
+            }, 5000);
+
+            // Timer for each slide
+            function startTimer(timerId) {
+                let time = 32 * 3600 + 23 * 60 + 29;
+                const timerElement = document.getElementById(timerId);
+                setInterval(() => {
+                    const hours = Math.floor(time / 3600);
+                    const minutes = Math.floor((time % 3600) / 60);
+                    const seconds = time % 60;
+                    timerElement.textContent = `${hours}h ${minutes}m ${seconds}s`;
+                    time--;
+                    if (time < 0) time = 0;
+                }, 1000);
+            }
+            startTimer('timer1');
+            startTimer('timer2');
+            startTimer('timer3');
+
+            // Routine Carousel for Small Screens
+            const routineSlides = document.getElementById('routineSlides');
+            const routineDots = document.querySelectorAll('#routineDots .dot');
+            let currentRoutineSlide = 0;
+            const totalRoutineSlides = 4;
+
+            function showRoutineSlide(index) {
+                routineSlides.style.transform = `translateX(-${index * 100}%)`;
+                routineDots.forEach(dot => dot.classList.remove('active'));
+                routineDots[index].classList.add('active');
+                currentRoutineSlide = index;
+            }
+
+            routineDots.forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const slideIndex = parseInt(dot.getAttribute('data-slide'));
+                    showRoutineSlide(slideIndex);
+                });
+            });
+
+            setInterval(() => {
+                currentRoutineSlide = (currentRoutineSlide + 1) % totalRoutineSlides;
+                showRoutineSlide(currentRoutineSlide);
+            }, 5000);
+
+            // Tab functionality
+            const tabs = document.querySelectorAll('.tab');
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    tabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                });
+            });
+
+            // Sidebar toggle functionality
+            const sidebar = document.getElementById('sidebar');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const mobileToggle = document.getElementById('mobileToggle');
+
+            sidebarToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('sidebar-hidden');
+                sidebarToggle.classList.toggle('visible');
+                const isHidden = sidebar.classList.contains('sidebar-hidden');
+                sidebarToggle.querySelector('i').className = isHidden ? 'fas fa-arrow-right' : 'fas fa-arrow-left';
+            });
+
+            mobileToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('active');
+            });
+
+            // Calendar Popup
+            const openCalendar = document.getElementById('openCalendar');
+            const calendarModal = document.getElementById('calendarModal');
+            const closeModal = document.getElementById('closeModal');
+            const prevMonth = document.getElementById('prevMonth');
+            const nextMonth = document.getElementById('nextMonth');
+            const currentMonth = document.getElementById('currentMonth');
+            const calendarBody = document.getElementById('calendarBody');
+
+            openCalendar.addEventListener('click', () => {
+                calendarModal.classList.add('active');
+            });
+
+            closeModal.addEventListener('click', () => {
+                calendarModal.classList.remove('active');
+            });
+
+            calendarModal.addEventListener('click', (e) => {
+                if (e.target === calendarModal) {
+                    calendarModal.classList.remove('active');
+                }
+            });
+
+            // Event Dropdown Toggle
+            const events = document.querySelectorAll('.calendar-table td .event');
+            events.forEach(event => {
+                event.addEventListener('click', () => {
+                    event.classList.toggle('active');
+                });
+            });
+
+            let currentDate = new Date(2025, 2, 1); // March 2025
+
+            function updateCalendar() {
+                const monthNames = [
+                    "জানুয়ারি", "ফেব্রুয়ারি", "মার্চ", "এপ্রিল", "মে", "জুন",
+                    "জুলাই", "আগস্ট", "সেপ্টেম্বর", "অক্টোবর", "নভেম্বর", "ডিসেম্বর"
+                ];
+                currentMonth.textContent = `${monthNames[currentDate.getMonth()]} ${currentDate.getFullYear()}`;
+                // Calendar generation logic can be added here if needed
+            }
+
+            prevMonth.addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() - 1);
+                updateCalendar();
+            });
+
+            nextMonth.addEventListener('click', () => {
+                currentDate.setMonth(currentDate.getMonth() + 1);
+                updateCalendar();
+            });
+
+            updateCalendar();
+
+            // My Streaks Popup
+            const openStreaks = document.getElementById('openStreaks');
+            const streaksModal = document.getElementById('streaksModal');
+            const closeStreaks = document.getElementById('closeStreaks');
+            const streakProgress = document.getElementById('streakProgress');
+            const progressMinutes = document.getElementById('progressMinutes');
+
+            openStreaks.addEventListener('click', (e) => {
+                e.preventDefault(); // Prevent default link behavior
+                streaksModal.classList.add('active');
+                // Simulate progress (for demo purposes, set to 0 minutes)
+                const minutesStudied = 0; // This would typically come from a backend or user activity tracking
+                const targetMinutes = 10;
+                const progressPercentage = (minutesStudied / targetMinutes) * 100;
+                streakProgress.style.width = `${progressPercentage}%`;
+                progressMinutes.textContent = minutesStudied;
+            });
+
+            closeStreaks.addEventListener('click', () => {
+                streaksModal.classList.remove('active');
+            });
+
+            streaksModal.addEventListener('click', (e) => {
+                if (e.target === streaksModal) {
+                    streaksModal.classList.remove('active');
+                }
+            });
+        });
+    </script>
+</body>
 </html>

@@ -89,3 +89,33 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initially show all chapters
     chapters.forEach((chapter) => chapter.classList.add("visible"));
   });
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.video-trigger').forEach(trigger => {
+        trigger.addEventListener('click', () => {
+            const videoUrl = trigger.getAttribute('data-video');
+            const popup = document.getElementById('videoPopup');
+            const videoIframe = document.getElementById('videoIframe');
+            
+            videoIframe.src = videoUrl;
+            popup.style.display = 'flex';
+        });
+    });
+
+    document.getElementById('closePopup').addEventListener('click', () => {
+        const popup = document.getElementById('videoPopup');
+        const videoIframe = document.getElementById('videoIframe');
+        
+        popup.style.display = 'none';
+        videoIframe.src = '';
+    });
+
+    document.getElementById('videoPopup').addEventListener('click', (e) => {
+        if (e.target === e.currentTarget) {
+            const popup = document.getElementById('videoPopup');
+            const videoIframe = document.getElementById('videoIframe');
+            
+            popup.style.display = 'none';
+            videoIframe.src = '';
+        }
+    });
+});
